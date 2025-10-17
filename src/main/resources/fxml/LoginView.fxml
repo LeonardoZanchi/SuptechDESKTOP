@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===========================================
+     LOGIN VIEW - Tela de Login da Aplicação
+     ===========================================
+     Este arquivo define a interface completa da tela de autenticação.
+     Responsabilidades:
+     - Layout horizontal com duas seções: logo e formulário
+     - Campos para entrada de e-mail e senha
+     - Checkbox para "lembrar de mim"
+     - Botão de login com ação de autenticação
+     - Exibição de mensagens de erro
+     - Aplicação de estilos CSS para aparência profissional
+
+     Estrutura:
+     - StackPane como container raiz
+     - HBox com duas VBox: seção da logo e seção do formulário
+     - Campos de entrada com validação e feedback visual
+
+     Controller: LoginController - gerencia autenticação e navegação
+     =========================================== -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="br.com.suptec.controllers.LoginController">
+    <children>
+        <!-- ===========================================
+             CONTAINER PRINCIPAL DO LOGIN
+             ===========================================
+             HBox horizontal que divide a tela em duas seções principais
+             =========================================== -->
+        <HBox alignment="CENTER" spacing="60.0" prefWidth="1200" prefHeight="800" styleClass="login-container">
+
+            <!-- ===========================================
+                 SEÇÃO DA LOGO - Lado esquerdo da tela
+                 ===========================================
+                 Exibe a identidade visual da aplicação
+                 =========================================== -->
+            <VBox alignment="CENTER" spacing="20.0" prefWidth="400">
+                <!-- Logo da empresa SUPTEC -->
+                <ImageView fx:id="imgLogo" fitWidth="300" preserveRatio="true"/>
+                <!-- Subtítulo descritivo da aplicação -->
+                <Label text="Sistema de Chamados Técnicos" styleClass="label-subtitle"/>
+            </VBox>
+
+            <!-- ===========================================
+                 SEÇÃO DO FORMULÁRIO - Lado direito da tela
+                 ===========================================
+                 Contém todos os campos e controles de login
+                 =========================================== -->
+            <VBox alignment="CENTER_LEFT" spacing="25.0" prefWidth="500">
+                <!-- Título de boas-vindas -->
+                <Label text="Bem-vindo!" styleClass="label-welcome"/>
+                <!-- Instrução para o usuário -->
+                <Label text="Faça login para acessar o sistema" styleClass="label-instruction"/>
+
+                <!-- ===========================================
+                     CAMPO DE E-MAIL
+                     =========================================== -->
+                <VBox spacing="15.0">
+                    <Label text="E-mail" styleClass="label-field"/>
+                    <TextField fx:id="txtUsuario" promptText="Digite seu e-mail" styleClass="text-field-custom"/>
+                </VBox>
+
+                <!-- ===========================================
+                     CAMPO DE SENHA
+                     =========================================== -->
+                <VBox spacing="15.0">
+                    <Label text="Senha" styleClass="label-field"/>
+                    <PasswordField fx:id="txtSenha" promptText="Digite sua senha" styleClass="text-field-custom"/>
+                </VBox>
+
+                <!-- ===========================================
+                     CHECKBOX "LEMBRAR DE MIM"
+                     =========================================== -->
+                <CheckBox fx:id="chkLembrar" text="Lembrar de mim" styleClass="checkbox-custom"/>
+
+                <!-- ===========================================
+                     BOTÃO DE LOGIN
+                     =========================================== -->
+                <VBox alignment="CENTER" spacing="10.0" prefWidth="400">
+                    <Button text="Entrar no Sistema" onAction="#onLogin" styleClass="btn-primary"/>
+                </VBox>
+
+                <!-- ===========================================
+                     LABEL PARA MENSAGENS DE ERRO
+                     =========================================== -->
+                <Label fx:id="lblMensagem" textFill="red" styleClass="label-error"/>
+            </VBox>
+        </HBox>
+    </children>
+</StackPane>

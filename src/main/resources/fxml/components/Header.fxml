@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===========================================
+     HEADER COMPONENT - Componente Cabeçalho da Aplicação
+     ===========================================
+     Este arquivo define o componente de cabeçalho usado no menu principal.
+     Responsabilidades:
+     - Exibir identidade visual da aplicação (SUPTEC)
+     - Mostrar informações do usuário logado
+     - Fornecer botão de logout para encerrar sessão
+     - Manter navegação consistente no topo da tela
+     - Aplicar gradiente azul característico da marca
+
+     Estrutura do Header:
+     - LADO ESQUERDO: Título e subtítulo da aplicação
+     - CENTRO: Espaçamento flexível (Region com HBox.hgrow="ALWAYS")
+     - LADO DIREITO: Nome do usuário e botão de logout
+
+     Funcionalidades Interativas:
+     - lblUsuarioLogado: Exibe dinamicamente o nome do usuário
+     - Botão "Sair": Aciona handleLogout para encerrar sessão
+
+     Controller: HeaderController - gerencia logout e dados do usuário
+     =========================================== -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<!-- ===========================================
+     CONTAINER DO CABEÇALHO - HBox horizontal
+     =========================================== -->
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="br.com.suptec.controllers.components.HeaderController"
+      styleClass="menu-header"
+      alignment="CENTER_LEFT"
+      spacing="20">
+    <!-- Padding interno para espaçamento -->
+    <padding>
+        <Insets top="20" right="30" bottom="20" left="30"/>
+    </padding>
+
+    <!-- ===========================================
+         SEÇÃO DO TÍTULO - Lado esquerdo do header
+         =========================================== -->
+    <VBox spacing="5">
+        <!-- Título principal da aplicação -->
+        <Label text="SUPTEC" styleClass="header-title"/>
+        <!-- Subtítulo descritivo -->
+        <Label text="Sistema de Chamados Técnicos" styleClass="header-subtitle"/>
+    </VBox>
+
+    <!-- ===========================================
+         ESPAÇADOR FLEXÍVEL - Ocupa espaço disponível
+         ===========================================
+         Permite que o conteúdo do lado direito fique à direita
+         =========================================== -->
+    <Region HBox.hgrow="ALWAYS"/>
+
+    <!-- ===========================================
+         SEÇÃO DO USUÁRIO - Lado direito do header
+         =========================================== -->
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <!-- Label que exibe o nome do usuário logado -->
+        <Label fx:id="lblUsuarioLogado" styleClass="user-label"/>
+        <!-- Botão de logout para encerrar sessão -->
+        <Button text="Sair" onAction="#handleLogout" styleClass="btn-secondary"/>
+    </HBox>
+</HBox>

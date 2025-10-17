@@ -1,0 +1,52 @@
+/* ===============================
+   LOGIN SCREEN STYLES - Estilos da Tela de Login
+   =======================================
+   Define estilos específicos para elementos da tela de login,
+   incluindo links, checkboxes e outros controles únicos da tela de autenticação.
+   Complementa os estilos genéricos com customizações específicas do login.
+   =============================== */
+
+/* ===============================
+   LINK (HYPERLINK) - links clicáveis na tela de login
+   =============================== */
+.hyperlink {
+    /* Remove sublinhado padrão para aparência mais limpa */
+    -fx-underline: false;
+}
+
+.hyperlink:hover {
+    /* Cor azul no hover para indicar interatividade */
+    -fx-text-fill: #0A2E50;
+}
+
+/* ===============================
+   CHECKBOX PERSONALIZADO - checkbox de "lembrar senha" ou similares
+   =============================== */
+.checkbox-custom {
+    /* Fonte de tamanho padrão para texto do checkbox */
+    -fx-font-size: 14px;
+    /* Cor de texto escura para boa legibilidade */
+    -fx-text-fill: #333333;
+    /* Fonte do sistema para consistência */
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.checkbox-custom .box {
+    /* Fundo branco para a caixa do checkbox */
+    -fx-background-color: #ffffff;
+    /* Borda cinza para definição */
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    /* Bordas levemente arredondadas */
+    -fx-border-radius: 3px;
+}
+
+.checkbox-custom:selected .mark {
+    /* Cor azul para o check quando selecionado */
+    -fx-background-color: #0078D4;
+}
+
+.checkbox-custom .box:hover {
+    /* Borda azul no hover para feedback visual */
+    -fx-border-color: #0078D4;
+}

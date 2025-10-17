@@ -1,0 +1,25 @@
+/* ===============================
+   CONTAINERS STYLES - Estilos dos Containers
+   =======================================
+   Define os estilos para containers genéricos e painéis da aplicação,
+   incluindo caixas de login, painéis de conteúdo e outros elementos
+   estruturais que organizam o layout da interface.
+   =============================== */
+
+/* ===============================
+   CONTAINER DE LOGIN - painel central da tela de login
+   =============================== */
+.login-container {
+    /* Fundo branco para contraste */
+    -fx-background-color: #ffffff;
+    /* Bordas arredondadas para aparência moderna */
+    -fx-background-radius: 20;
+    /* Borda cinza sutil para definição */
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    /* Padding interno generoso para espaçamento */
+    -fx-padding: 40;
+    /* Sombra para dar profundidade e destaque */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0.7, 0, 8);
+}

@@ -1,0 +1,57 @@
+/* ===============================
+   MENU LAYOUT STYLES - Estilos de Layout do Menu
+   =======================================
+   Define os estilos para o layout geral do menu, incluindo
+   container principal, títulos de boas-vindas e rodapé.
+   Organiza o espaçamento e cores de fundo para uma aparência coesa.
+   =============================== */
+
+/* ===============================
+   CONTAINER DO MENU - fundo principal da tela do menu
+   =============================== */
+.menu-container {
+    /* Fundo cinza claro para área de conteúdo */
+    -fx-background-color: #f5f7fa;
+}
+
+/* ===============================
+   TÍTULO DE BOAS-VINDAS - título grande na área central
+   =============================== */
+.welcome-title {
+    /* Fonte muito grande para impacto visual */
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    /* Cor azul escuro para consistência com tema */
+    -fx-text-fill: #0A2E50;
+}
+
+/* ===============================
+   SUBTÍTULO DE BOAS-VINDAS - texto abaixo do título principal
+   =============================== */
+.welcome-subtitle {
+    /* Fonte média para texto secundário */
+    -fx-font-size: 16px;
+    /* Cor cinza para texto descritivo */
+    -fx-text-fill: #607D88;
+}
+
+/* ===============================
+   RODAPÉ DO MENU - área inferior com informações
+   =============================== */
+.menu-footer {
+    /* Fundo cinza claro para o rodapé */
+    -fx-background-color: #e8edf2;
+    /* Borda superior sutil para separação */
+    -fx-border-color: #d0d7de;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* ===============================
+   TEXTO DO RODAPÉ - informações no rodapé
+   =============================== */
+.footer-text {
+    /* Fonte pequena para informações secundárias */
+    -fx-font-size: 12px;
+    /* Cor cinza para texto discreto */
+    -fx-text-fill: #607D88;
+}

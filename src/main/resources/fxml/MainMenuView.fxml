@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===========================================
+     MAIN MENU VIEW - Tela Principal do Menu
+     ===========================================
+     Este arquivo define o layout principal da tela do menu após o login.
+     Responsabilidades:
+     - Estrutura geral da tela do menu usando BorderPane
+     - Organiza o conteúdo em três regiões: topo, centro e rodapé
+     - Inclui componentes modulares via fx:include para melhor manutenção
+     - Aplica estilo CSS através da classe "menu-container"
+
+     Estrutura:
+     - TOP: Cabeçalho com título e informações do usuário
+     - CENTER: Grid de cards clicáveis para navegação
+     - BOTTOM: Rodapé com informações da versão e copyright
+
+     Controller: MainMenuController - coordena os componentes incluídos
+     =========================================== -->
+
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.suptec.controllers.MainMenuController"
+            styleClass="menu-container">
+
+    <!-- ===========================================
+         REGIÃO SUPERIOR - Cabeçalho do Menu
+         ===========================================
+         Inclui o componente Header.fxml que contém:
+         - Título da aplicação (SUPTEC)
+         - Subtítulo descritivo
+         - Nome do usuário logado
+         - Botão de logout
+         =========================================== -->
+    <top>
+        <fx:include source="components/Header.fxml"/>
+    </top>
+
+    <!-- ===========================================
+         REGIÃO CENTRAL - Área Principal de Navegação
+         ===========================================
+         Inclui o componente MenuGrid.fxml que contém:
+         - Título de boas-vindas
+         - Grid 2x2 com cards clicáveis
+         - Cards para: Usuários, Chamados, Relatórios, Configurações
+         =========================================== -->
+    <center>
+        <fx:include source="components/MenuGrid.fxml"/>
+    </center>
+
+    <!-- ===========================================
+         REGIÃO INFERIOR - Rodapé da Aplicação
+         ===========================================
+         Inclui o componente Footer.fxml que contém:
+         - Número da versão
+         - Copyright da empresa
+         =========================================== -->
+    <bottom>
+        <fx:include source="components/Footer.fxml"/>
+    </bottom>
+</BorderPane>

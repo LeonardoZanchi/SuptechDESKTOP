@@ -1,0 +1,36 @@
+/* ===============================
+   COLOR PALETTE - Paleta de Cores da Aplicação
+   =======================================
+   Define as variáveis de cor principais da aplicação SUPTEC.
+   Estas variáveis são usadas em todos os outros arquivos CSS
+   para manter consistência visual e facilitar mudanças de tema.
+
+   Paleta baseada em azul profissional com tons de cinza para
+   elementos secundários, criando uma aparência corporativa e confiável.
+   =============================== */
+
+/* ===============================
+   VARIÁVEIS DE COR - aplicadas globalmente a todos os elementos
+   =============================== */
+* {
+    /* Azul escuro principal - usado em cabeçalhos, botões primários */
+    -fx-color-primary: #0A2E50;
+
+    /* Azul escuro médio - usado em gradientes e hover states */
+    -fx-color-primary-dark: #123E6B;
+
+    /* Azul médio - usado em elementos secundários e destaques */
+    -fx-color-primary-light: #1A4A7A;
+
+    /* Cinza médio - usado em texto secundário e ícones */
+    -fx-color-grey: #607D88;
+
+    /* Cinza claro - usado em bordas e separadores */
+    -fx-color-border: #e0e0e0;
+
+    /* Branco - fundo principal da aplicação */
+    -fx-color-background: #ffffff;
+
+    /* Cinza muito claro - fundo de campos de entrada */
+    -fx-color-field-bg: #f3f6f8;
+}

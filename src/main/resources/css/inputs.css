@@ -1,0 +1,38 @@
+/* ===============================
+   INPUTS STYLES - Estilos dos Campos de Entrada
+   =======================================
+   Define os estilos para campos de entrada de texto como TextField,
+   PasswordField e outros controles de entrada. Inclui estados normais
+   e de foco com transições suaves e feedback visual.
+   =============================== */
+
+/* ===============================
+   CAMPO DE TEXTO PERSONALIZADO - TextField e PasswordField
+   =============================== */
+.text-field-custom {
+    /* Fundo cinza claro para campos não focados */
+    -fx-background-color: #f3f6f8;
+    /* Bordas arredondadas para aparência moderna */
+    -fx-background-radius: 10;
+    /* Borda transparente inicialmente */
+    -fx-border-color: transparent;
+    /* Fonte de tamanho médio para boa legibilidade */
+    -fx-font-size: 16px;
+    /* Padding interno para conforto visual */
+    -fx-padding: 15 20;
+    /* Largura fixa para consistência */
+    -fx-pref-width: 400;
+    /* Altura fixa para aparência uniforme */
+    -fx-pref-height: 50;
+}
+
+.text-field-custom:focused {
+    /* Borda azul quando focado para indicar seleção */
+    -fx-border-color: #0A2E50;
+    /* Borda mais grossa quando focado */
+    -fx-border-width: 2;
+    /* Fundo branco quando focado para destaque */
+    -fx-background-color: #ffffff;
+    /* Sombra sutil para profundidade quando focado */
+    -fx-effect: dropshadow(gaussian, rgba(10,46,80,0.2), 6, 0.5, 0, 2);
+}

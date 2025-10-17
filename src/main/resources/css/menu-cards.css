@@ -1,0 +1,69 @@
+/* ===============================
+   MENU CARDS STYLES - Estilos dos Cards do Menu
+   =======================================
+   Define os estilos para os cards clicáveis do menu principal,
+   incluindo aparência base, efeitos hover, ícones, títulos e descrições.
+   Os cards são elementos interativos que levam a diferentes seções da aplicação.
+   =============================== */
+
+/* ===============================
+   CARD DO MENU - container clicável principal
+   =============================== */
+.menu-card {
+    /* Fundo branco para contraste */
+    -fx-background-color: white;
+    /* Bordas arredondadas para aparência moderna */
+    -fx-background-radius: 20;
+    /* Sombra sutil para profundidade */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 5);
+    /* Cursor de mão para indicar clicabilidade */
+    -fx-cursor: hand;
+    /* Dimensões fixas para consistência */
+    -fx-pref-width: 280;
+    -fx-pref-height: 250;
+}
+
+.menu-card:hover {
+    /* Mantém fundo branco no hover */
+    -fx-background-color: #ffffff;
+    /* Sombra azul mais intensa no hover */
+    -fx-effect: dropshadow(gaussian, rgba(10,46,80,0.3), 20, 0.3, 0, 8);
+    /* Efeito de escala para feedback visual */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ===============================
+   ÍCONE DO CARD - ícone grande representando a funcionalidade
+   =============================== */
+.card-icon {
+    /* Ícone grande para destaque visual */
+    -fx-font-size: 64px;
+    /* Cor azul escuro para consistência com tema */
+    -fx-text-fill: #0A2E50;
+}
+
+/* ===============================
+   TÍTULO DO CARD - nome da funcionalidade
+   =============================== */
+.card-title {
+    /* Fonte grande e em negrito para destaque */
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    /* Cor azul escuro para consistência */
+    -fx-text-fill: #0A2E50;
+}
+
+/* ===============================
+   DESCRIÇÃO DO CARD - breve explicação da funcionalidade
+   =============================== */
+.card-description {
+    /* Fonte menor para texto descritivo */
+    -fx-font-size: 14px;
+    /* Cor cinza para texto secundário */
+    -fx-text-fill: #607D88;
+    /* Largura máxima para quebra de linha */
+    -fx-max-width: 200;
+    /* Centralização do texto */
+    -fx-alignment: center;
+}

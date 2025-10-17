@@ -1,0 +1,48 @@
+/* ===============================
+   BUTTONS STYLES - Estilos dos Botões
+   =======================================
+   Define os estilos para todos os botões da aplicação,
+   incluindo botões primários com gradientes, efeitos hover,
+   estados pressionados e transições suaves.
+   =============================== */
+
+/* ===============================
+   BOTÃO PRIMÁRIO - botão principal de ação (ex: Login, Enviar)
+   =============================== */
+.btn-primary {
+    /* Gradiente azul escuro para aparência profissional */
+    -fx-background-color: linear-gradient(to bottom, #0A2E50, #123E6B);
+    /* Texto branco para contraste */
+    -fx-text-fill: white;
+    /* Bordas arredondadas para aparência moderna */
+    -fx-background-radius: 15;
+    /* Fonte grande e em negrito para destaque */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    /* Padding vertical para altura adequada */
+    -fx-padding: 18 0;
+    /* Cursor de mão para indicar clicabilidade */
+    -fx-cursor: hand;
+    /* Sombra para profundidade */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.4, 0, 4);
+    /* Transição suave para efeitos hover */
+    -fx-transition: 0.3s;
+    /* Largura fixa para consistência */
+    -fx-pref-width: 400;
+    /* Altura fixa para aparência uniforme */
+    -fx-pref-height: 60;
+}
+
+.btn-primary:hover {
+    /* Gradiente mais claro no hover para feedback */
+    -fx-background-color: linear-gradient(to bottom, #123E6B, #1A4A7A);
+    /* Sombra mais intensa no hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 5);
+}
+
+.btn-primary:pressed {
+    /* Gradiente mais escuro quando pressionado */
+    -fx-background-color: linear-gradient(to bottom, #071C33, #0A2E50);
+    /* Sombra reduzida quando pressionado */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0.3, 0, 3);
+}

@@ -1,0 +1,40 @@
+/* ===============================
+   MENU STYLES - Estilos do Menu Principal
+   =======================================
+   Este arquivo importa todos os estilos relacionados ao menu principal
+   e define estilos específicos para botões secundários usados no menu.
+   Organiza os estilos em módulos separados para melhor manutenção.
+   =============================== */
+
+/* Importa estilos específicos do menu */
+@import "menu-header.css";  /* Estilos do cabeçalho */
+@import "menu-cards.css";   /* Estilos dos cards clicáveis */
+@import "menu-layout.css";  /* Estilos de layout e rodapé */
+
+/* ===============================
+   BOTÃO SECUNDÁRIO - usado no menu
+   =============================== */
+.btn-secondary {
+    /* Botão transparente para ações secundárias */
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-border-color: rgba(255,255,255,0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+.btn-secondary:hover {
+    /* Efeito hover - mais opaco */
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-border-color: rgba(255,255,255,0.5);
+}
+
+.btn-secondary:pressed {
+    /* Efeito pressionado - menos opaco */
+    -fx-background-color: rgba(255,255,255,0.1);
+}

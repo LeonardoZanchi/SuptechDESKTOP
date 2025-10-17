@@ -1,0 +1,47 @@
+/* ===============================
+   SUPTEC MASTER STYLE - Estilo Principal da Aplicação
+   =======================================
+   Este é o arquivo CSS principal da aplicação SUPTEC Desktop.
+   Importa todos os módulos de estilo organizados por categoria,
+   criando uma arquitetura modular e mantível para os estilos.
+
+   Organização dos módulos:
+   - colors.css: Definição das cores da paleta
+   - typography.css: Estilos de texto e tipografia
+   - buttons.css: Estilos para todos os botões
+   - inputs.css: Estilos para campos de entrada
+   - containers.css: Estilos para containers e layouts
+   - login.css: Estilos específicos da tela de login
+   - menu.css: Estilos específicos do menu principal
+
+   Esta abordagem modular permite:
+   - Manutenção mais fácil de estilos específicos
+   - Reutilização de componentes
+   - Carregamento otimizado
+   - Organização clara do código
+   =============================== */
+
+/* ===============================
+   IMPORTAÇÃO DOS MÓDULOS DE ESTILO
+   =============================== */
+
+/* Cores da aplicação - paleta e variáveis de cor */
+@import "colors.css";
+
+/* Tipografia - fontes, tamanhos e estilos de texto */
+@import "typography.css";
+
+/* Botões - estilos para todos os tipos de botão */
+@import "buttons.css";
+
+/* Campos de entrada - inputs, textfields, etc. */
+@import "inputs.css";
+
+/* Containers - layouts, painéis e estruturas */
+@import "containers.css";
+
+/* Tela de login - estilos específicos do login */
+@import "login.css";
+
+/* Menu principal - estilos do menu e seus componentes */
+@import "menu.css";

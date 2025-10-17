@@ -1,0 +1,52 @@
+/* ===============================
+   MENU HEADER STYLES - Estilos do Cabeçalho do Menu
+   =======================================
+   Define os estilos visuais para o cabeçalho do menu principal,
+   incluindo gradiente de fundo, títulos, subtítulos e informações do usuário.
+   Cria uma aparência profissional e consistente para o topo da tela do menu.
+   =============================== */
+
+/* ===============================
+   CABEÇALHO DO MENU - container principal
+   =============================== */
+.menu-header {
+    /* Gradiente azul escuro para fundo profissional */
+    -fx-background-color: linear-gradient(to bottom, #0A2E50, #123E6B);
+    /* Sombra para dar profundidade */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);
+}
+
+/* ===============================
+   TÍTULO PRINCIPAL - título grande do menu
+   =============================== */
+.header-title {
+    /* Fonte grande e em negrito para destaque */
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ===============================
+   SUBTÍTULO - texto menor abaixo do título
+   =============================== */
+.header-subtitle {
+    /* Fonte menor para texto secundário */
+    -fx-font-size: 14px;
+    /* Cor azul clara para contraste */
+    -fx-text-fill: #c8d8e6;
+}
+
+/* ===============================
+   RÓTULO DO USUÁRIO - mostra nome do usuário logado
+   =============================== */
+.user-label {
+    /* Fonte padrão para informações do usuário */
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    /* Padding interno para espaçamento */
+    -fx-padding: 8 15;
+    /* Fundo semi-transparente para destacar */
+    -fx-background-color: rgba(255,255,255,0.1);
+    /* Bordas arredondadas para aparência moderna */
+    -fx-background-radius: 20;
+}

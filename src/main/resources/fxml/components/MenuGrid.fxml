@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===========================================
+     MENU GRID COMPONENT - Componente Grid do Menu
+     ===========================================
+     Este arquivo define o componente central do menu que contém
+     os cards clicáveis para navegação entre diferentes seções.
+     Responsabilidades:
+     - Layout vertical com títulos de boas-vindas
+     - Grid 2x2 com quatro cards funcionais
+     - Cada card representa uma funcionalidade principal
+     - Gerenciamento de eventos de clique para navegação
+     - Aplicação de estilos visuais para interatividade
+
+     Funcionalidades dos Cards:
+     - Usuários: Gerenciamento de usuários do sistema
+     - Chamados: Sistema de chamados técnicos
+     - Relatórios: Visualização de dados e estatísticas
+     - Configurações: Preferências e configurações do sistema
+
+     Controller: MenuGridController - gerencia cliques nos cards
+     =========================================== -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<!-- ===========================================
+     CONTAINER PRINCIPAL - VBox vertical
+     =========================================== -->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="br.com.suptec.controllers.components.MenuGridController"
+      alignment="CENTER"
+      spacing="40">
+    <!-- Padding geral para espaçamento -->
+    <padding>
+        <Insets top="50" right="50" bottom="50" left="50"/>
+    </padding>
+
+    <!-- ===========================================
+         SEÇÃO DE BOAS-VINDAS
+         =========================================== -->
+    <VBox alignment="CENTER" spacing="10">
+        <Label text="Bem-vindo ao Sistema" styleClass="welcome-title"/>
+        <Label text="Selecione uma opção abaixo" styleClass="welcome-subtitle"/>
+    </VBox>
+
+    <!-- ===========================================
+         GRID DE CARDS - 2x2 com cards funcionais
+         =========================================== -->
+    <GridPane hgap="30" vgap="30" alignment="CENTER">
+
+        <!-- ===========================================
+             CARD 1: USUÁRIOS (Posição 0,0)
+             ===========================================
+             Gerenciamento de usuários do sistema
+             =========================================== -->
+        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+              onMouseClicked="#handleUsuarios"
+              GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+            <Label text="U" styleClass="card-icon"/>
+            <Label text="Usuários" styleClass="card-title"/>
+            <Label text="Gerenciar usuários" styleClass="card-description" wrapText="true"/>
+        </VBox>
+
+        <!-- ===========================================
+             CARD 2: CHAMADOS (Posição 1,0)
+             ===========================================
+             Sistema de chamados técnicos
+             =========================================== -->
+        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+              onMouseClicked="#handleChamados"
+              GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+            <Label text="C" styleClass="card-icon"/>
+            <Label text="Chamados" styleClass="card-title"/>
+            <Label text="Gerenciar chamados" styleClass="card-description" wrapText="true"/>
+        </VBox>
+
+        <!-- ===========================================
+             CARD 3: RELATÓRIOS (Posição 0,1)
+             ===========================================
+             Visualização de dados e estatísticas
+             =========================================== -->
+        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+              onMouseClicked="#handleRelatorios"
+              GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+            <Label text="R" styleClass="card-icon"/>
+            <Label text="Relatórios" styleClass="card-title"/>
+            <Label text="Visualizar dados" styleClass="card-description" wrapText="true"/>
+        </VBox>
+
+        <!-- ===========================================
+             CARD 4: CONFIGURAÇÕES (Posição 1,1)
+             ===========================================
+             Preferências e configurações do sistema
+             =========================================== -->
+        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+              onMouseClicked="#handleConfiguracoes"
+              GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+            <Label text="S" styleClass="card-icon"/>
+            <Label text="Configurações" styleClass="card-title"/>
+            <Label text="Preferências" styleClass="card-description" wrapText="true"/>
+        </VBox>
+    </GridPane>
+</VBox>
