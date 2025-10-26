@@ -15,8 +15,8 @@
    BOTÃO SECUNDÁRIO - usado no menu
    =============================== */
 .btn-secondary {
-    /* Botão transparente para ações secundárias */
-    -fx-background-color: rgba(255,255,255,0.2);
+    /* Botão com fundo azul escuro para ações secundárias */
+    -fx-background-color: #123E6B;
     -fx-text-fill: white;
     -fx-background-radius: 8;
     -fx-font-size: 14px;
@@ -29,12 +29,40 @@
 }
 
 .btn-secondary:hover {
-    /* Efeito hover - mais opaco */
-    -fx-background-color: rgba(255,255,255,0.3);
+    /* Efeito hover - mais claro */
+    -fx-background-color: #1A4A7A;
     -fx-border-color: rgba(255,255,255,0.5);
 }
 
 .btn-secondary:pressed {
-    /* Efeito pressionado - menos opaco */
-    -fx-background-color: rgba(255,255,255,0.1);
+    /* Efeito pressionado - mais escuro */
+    -fx-background-color: #0A2E50;
+}
+
+/* ===============================
+   BOTÃO DANGER - usado para ações de sair/logout
+   =============================== */
+.btn-danger {
+    /* Botão com fundo vermelho para ações de logout */
+    -fx-background-color: #DC3545;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-border-color: rgba(255,255,255,0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+.btn-danger:hover {
+    /* Efeito hover - vermelho mais claro */
+    -fx-background-color: #E55362;
+    -fx-border-color: rgba(255,255,255,0.5);
+}
+
+.btn-danger:pressed {
+    /* Efeito pressionado - vermelho mais escuro */
+    -fx-background-color: #BD2130;
 }

@@ -49,14 +49,4 @@
         <fx:include source="components/MenuGrid.fxml"/>
     </center>
 
-    <!-- ===========================================
-         REGIÃO INFERIOR - Rodapé da Aplicação
-         ===========================================
-         Inclui o componente Footer.fxml que contém:
-         - Número da versão
-         - Copyright da empresa
-         =========================================== -->
-    <bottom>
-        <fx:include source="components/Footer.fxml"/>
-    </bottom>
 </BorderPane>

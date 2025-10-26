@@ -18,9 +18,9 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 5);
     /* Cursor de mão para indicar clicabilidade */
     -fx-cursor: hand;
-    /* Dimensões fixas para consistência */
-    -fx-pref-width: 280;
-    -fx-pref-height: 250;
+    /* Dimensões ampliadas para visual profissional */
+    -fx-pref-width: 450;
+    -fx-pref-height: 380;
 }
 
 .menu-card:hover {
@@ -37,8 +37,8 @@
    ÍCONE DO CARD - ícone grande representando a funcionalidade
    =============================== */
 .card-icon {
-    /* Ícone grande para destaque visual */
-    -fx-font-size: 64px;
+    /* Ícone extra grande para destaque visual profissional */
+    -fx-font-size: 96px;
     /* Cor azul escuro para consistência com tema */
     -fx-text-fill: #0A2E50;
 }
@@ -47,8 +47,8 @@
    TÍTULO DO CARD - nome da funcionalidade
    =============================== */
 .card-title {
-    /* Fonte grande e em negrito para destaque */
-    -fx-font-size: 24px;
+    /* Fonte extra grande e em negrito para destaque */
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
     /* Cor azul escuro para consistência */
     -fx-text-fill: #0A2E50;
@@ -58,12 +58,12 @@
    DESCRIÇÃO DO CARD - breve explicação da funcionalidade
    =============================== */
 .card-description {
-    /* Fonte menor para texto descritivo */
-    -fx-font-size: 14px;
+    /* Fonte maior para melhor legibilidade */
+    -fx-font-size: 18px;
     /* Cor cinza para texto secundário */
     -fx-text-fill: #607D88;
-    /* Largura máxima para quebra de linha */
-    -fx-max-width: 200;
+    /* Largura máxima aumentada para quebra de linha */
+    -fx-max-width: 340;
     /* Centralização do texto */
     -fx-alignment: center;
 }

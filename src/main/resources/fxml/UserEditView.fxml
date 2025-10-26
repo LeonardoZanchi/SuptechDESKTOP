@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.suptec.controllers.UserEditController"
+            styleClass="user-edit-container"
+            stylesheets="@../css/main.css"
+            prefWidth="700"
+            prefHeight="700">
+
+    <!-- Cabeçalho -->
+    <top>
+        <VBox styleClass="header-container">
+            <Label text="Editar Usuário" styleClass="page-title"/>
+            <Label fx:id="lblSubtitulo" text="Modificar informações do usuário selecionado" styleClass="page-subtitle"/>
+            <Separator styleClass="separator"/>
+        </VBox>
+    </top>
+
+    <!-- Formulário Central com Scroll -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="scroll-pane">
+            <VBox spacing="25" styleClass="form-container">
+            
+            <!-- Informações Pessoais -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="INFORMAÇÕES PESSOAIS" styleClass="section-title"/>
+                
+                <!-- Nome -->
+                <VBox spacing="8">
+                    <Label text="Nome Completo *" styleClass="form-label"/>
+                    <TextField fx:id="txtNome" promptText="Digite o nome completo do usuário" styleClass="form-input"/>
+                </VBox>
+
+                <!-- Email -->
+                <VBox spacing="8">
+                    <Label text="Email *" styleClass="form-label"/>
+                    <TextField fx:id="txtEmail" promptText="Digite o endereço de email" styleClass="form-input"/>
+                </VBox>
+
+                <!-- Telefone -->
+                <VBox spacing="8">
+                    <Label text="Telefone *" styleClass="form-label"/>
+                    <TextField fx:id="txtTelefone" promptText="(00) 00000-0000" styleClass="form-input"/>
+                </VBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Informações Profissionais -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="INFORMAÇÕES PROFISSIONAIS" styleClass="section-title"/>
+                
+                <!-- Tipo de Usuário -->
+                <VBox spacing="8">
+                    <Label text="Tipo de Usuário *" styleClass="form-label"/>
+                    <ComboBox fx:id="cmbTipo" promptText="Selecione o tipo de usuário" styleClass="form-input" maxWidth="Infinity"/>
+                </VBox>
+
+                <!-- Setor (condicional - para Gerentes e Usuários) -->
+                <VBox fx:id="vboxSetor" spacing="8" managed="false" visible="false" styleClass="conditional-section">
+                    <Label text="Setor *" styleClass="form-label"/>
+                    <TextField fx:id="txtSetor" promptText="Digite o setor de trabalho" styleClass="form-input"/>
+                </VBox>
+
+                <!-- Especialidade (condicional - para Técnicos) -->
+                <VBox fx:id="vboxEspecialidade" spacing="8" managed="false" visible="false" styleClass="conditional-section">
+                    <Label text="Especialidade *" styleClass="form-label"/>
+                    <TextField fx:id="txtEspecialidade" promptText="Digite a área de especialidade" styleClass="form-input"/>
+                </VBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Segurança -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="SEGURANÇA E ACESSO" styleClass="section-title"/>
+                
+                <!-- Alterar Senha (Opcional) -->
+                <VBox spacing="12">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <CheckBox fx:id="chkAlterarSenha" text="Alterar senha do usuário" styleClass="check-box"/>
+                    </HBox>
+                    <Label text="Marque esta opção apenas se desejar alterar a senha atual do usuário" styleClass="hint-text">
+                        <padding>
+                            <Insets left="5"/>
+                        </padding>
+                    </Label>
+                </VBox>
+
+                <!-- Nova Senha (condicional) -->
+                <VBox fx:id="vboxNovaSenha" spacing="8" managed="false" visible="false" styleClass="conditional-section">
+                    <Label text="Nova Senha *" styleClass="form-label"/>
+                    <PasswordField fx:id="txtNovaSenha" promptText="Digite a nova senha (mínimo 6 caracteres)" styleClass="form-input"/>
+                </VBox>
+
+                <!-- Confirmar Senha (condicional) -->
+                <VBox fx:id="vboxConfirmarSenha" spacing="8" managed="false" visible="false" styleClass="conditional-section">
+                    <Label text="Confirmar Nova Senha *" styleClass="form-label"/>
+                    <PasswordField fx:id="txtConfirmarSenha" promptText="Confirme a nova senha" styleClass="form-input"/>
+                </VBox>
+            </VBox>
+
+            <!-- Observação sobre campos obrigatórios -->
+            <HBox alignment="CENTER_LEFT" spacing="8" styleClass="required-note">
+                <padding>
+                    <Insets top="15"/>
+                </padding>
+                <Label text="*" styleClass="required-asterisk"/>
+                <Label text="Campos obrigatórios" styleClass="hint-text"/>
+            </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- Botões de Ação -->
+    <bottom>
+        <HBox spacing="20" alignment="CENTER" styleClass="button-container">
+            <Button text="Salvar Alterações" 
+                    onAction="#handleSalvar" 
+                    styleClass="btn-primary"
+                    prefWidth="200"/>
+            
+            <Button text="Cancelar" 
+                    onAction="#handleCancelar" 
+                    styleClass="btn-secondary"
+                    prefWidth="150"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

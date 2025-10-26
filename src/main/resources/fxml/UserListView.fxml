@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===========================================
+     USER LIST VIEW - Tela de Listagem de Usuários
+     ===========================================
+     Este arquivo define o layout da tela de listagem de usuários.
+     Responsabilidades:
+     - Exibir tabela com lista de usuários (técnicos, gerentes, usuários)
+     - Permitir busca e filtro de usuários
+     - Fornecer ações de criar, editar, excluir e visualizar
+     - Exibir informações: nome, email, setor, telefone e tipo
+
+     Estrutura:
+     - TOP: Cabeçalho com título e botão voltar
+     - CENTER: Campo de busca, tabela de usuários e contador
+     - BOTTOM: Barra de ações (novo, editar, excluir, atualizar)
+
+     Controller: UserListController - gerencia a lógica da listagem
+     =========================================== -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.suptec.controllers.UserListController"
+            styleClass="user-edit-container"
+            stylesheets="@../css/main.css"
+            prefWidth="900"
+            prefHeight="700">
+
+    <!-- ===========================================
+         REGIÃO SUPERIOR - Cabeçalho
+         =========================================== -->
+    <top>
+        <VBox styleClass="header-container">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Button fx:id="btnVoltar" 
+                        text="← Voltar" 
+                        onAction="#handleVoltar"
+                        styleClass="btn-back"/>
+                
+                <VBox>
+                    <Label text="Gerenciamento de Usuários" styleClass="page-title"/>
+                    <Label text="Visualize e gerencie todos os usuários do sistema" styleClass="page-subtitle"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ===========================================
+         REGIÃO CENTRAL - Conteúdo Principal
+         =========================================== -->
+    <center>
+        <VBox spacing="20" styleClass="form-container">
+
+            <!-- Barra de Busca -->
+            <VBox spacing="8">
+                <Label text="BUSCAR USUÁRIOS" styleClass="section-title"/>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="🔍" style="-fx-font-size: 18px; -fx-text-fill: -fx-color-primary;"/>
+                    <TextField fx:id="searchField"
+                              promptText="Digite nome, email, setor ou tipo de usuário..."
+                              styleClass="search-field"
+                              HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnAtualizar"
+                            text="🔄 Atualizar"
+                            onAction="#handleAtualizar"
+                            styleClass="btn-secondary"/>
+                </HBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Informações e Tabela -->
+            <VBox spacing="15">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="totalUsuariosLabel" 
+                           text="0 usuário(s) encontrado(s)"
+                           styleClass="info-label"/>
+                </HBox>
+
+                <!-- Tabela de Usuários -->
+                <TableView fx:id="userTable" 
+                          VBox.vgrow="ALWAYS"
+                          styleClass="user-table"
+                          prefHeight="400">
+                    
+                    <columns>
+                        <TableColumn fx:id="colNome" 
+                                    text="Nome" 
+                                    sortable="true"
+                                    prefWidth="200"/>
+                        
+                        <TableColumn fx:id="colEmail" 
+                                    text="Email" 
+                                    sortable="true"
+                                    prefWidth="250"/>
+                        
+                        <TableColumn fx:id="colTelefone" 
+                                    text="Telefone" 
+                                    sortable="false"
+                                    prefWidth="120"/>
+                        
+                        <TableColumn fx:id="colSetor" 
+                                    text="Setor/Especialidade" 
+                                    sortable="true"
+                                    prefWidth="180"/>
+                    
+                    <TableColumn fx:id="colTipo" 
+                                text="Tipo" 
+                                sortable="true"
+                                prefWidth="100"/>
+                </columns>
+                
+                <!-- Mensagem quando não há dados -->
+                <placeholder>
+                    <Label text="📋 Nenhum usuário encontrado" styleClass="hint-text" style="-fx-font-size: 16px;"/>
+                </placeholder>
+            </TableView>
+            </VBox>
+        </VBox>
+    </center>
+
+    <!-- ===========================================
+         REGIÃO INFERIOR - Barra de Ações
+         =========================================== -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER" styleClass="button-container">
+
+            <Button fx:id="btnNovo"
+                    text="Novo Usuário"
+                    onAction="#handleNovo"
+                    styleClass="btn-primary"
+                    prefWidth="150"/>
+
+            <Button fx:id="btnInformacoes"
+                    text="Informações"
+                    onAction="#handleVisualizarDetalhes"
+                    styleClass="btn-secondary"
+                    prefWidth="130"/>
+
+            <Button fx:id="btnEditar"
+                    text=" Editar"
+                    onAction="#handleEditar"
+                    styleClass="btn-secondary"
+                    prefWidth="120"/>
+
+            <Button fx:id="btnExcluir"
+                    text="Excluir"
+                    onAction="#handleExcluir"
+                    styleClass="btn-danger"
+                    prefWidth="120"/>
+        </HBox>
+    </bottom>
+</BorderPane>

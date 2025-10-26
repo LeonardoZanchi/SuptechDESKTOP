@@ -32,15 +32,15 @@
       fx:controller="br.com.suptec.controllers.components.MenuGridController"
       alignment="CENTER"
       spacing="40">
-    <!-- Padding geral para espaçamento -->
+    <!-- Padding ajustado para permitir visualização do rodapé -->
     <padding>
-        <Insets top="50" right="50" bottom="50" left="50"/>
+        <Insets top="40" right="80" bottom="30" left="80"/>
     </padding>
 
     <!-- ===========================================
          SEÇÃO DE BOAS-VINDAS
          =========================================== -->
-    <VBox alignment="CENTER" spacing="10">
+    <VBox alignment="CENTER" spacing="20">
         <Label text="Bem-vindo ao Sistema" styleClass="welcome-title"/>
         <Label text="Selecione uma opção abaixo" styleClass="welcome-subtitle"/>
     </VBox>
@@ -48,7 +48,7 @@
     <!-- ===========================================
          GRID DE CARDS - 2x2 com cards funcionais
          =========================================== -->
-    <GridPane hgap="30" vgap="30" alignment="CENTER">
+    <GridPane hgap="50" vgap="50" alignment="CENTER">
 
         <!-- ===========================================
              CARD 1: USUÁRIOS (Posição 0,0)
@@ -59,7 +59,7 @@
               onMouseClicked="#handleUsuarios"
               GridPane.columnIndex="0" GridPane.rowIndex="0">
             <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
-            <Label text="U" styleClass="card-icon"/>
+            <Label text="👥" styleClass="card-icon"/>
             <Label text="Usuários" styleClass="card-title"/>
             <Label text="Gerenciar usuários" styleClass="card-description" wrapText="true"/>
         </VBox>
@@ -73,7 +73,7 @@
               onMouseClicked="#handleChamados"
               GridPane.columnIndex="1" GridPane.rowIndex="0">
             <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
-            <Label text="C" styleClass="card-icon"/>
+            <Label text="📞" styleClass="card-icon"/>
             <Label text="Chamados" styleClass="card-title"/>
             <Label text="Gerenciar chamados" styleClass="card-description" wrapText="true"/>
         </VBox>
@@ -87,7 +87,7 @@
               onMouseClicked="#handleRelatorios"
               GridPane.columnIndex="0" GridPane.rowIndex="1">
             <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
-            <Label text="R" styleClass="card-icon"/>
+            <Label text="📊" styleClass="card-icon"/>
             <Label text="Relatórios" styleClass="card-title"/>
             <Label text="Visualizar dados" styleClass="card-description" wrapText="true"/>
         </VBox>
@@ -101,7 +101,7 @@
               onMouseClicked="#handleConfiguracoes"
               GridPane.columnIndex="1" GridPane.rowIndex="1">
             <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
-            <Label text="S" styleClass="card-icon"/>
+            <Label text="🔧" styleClass="card-icon"/>
             <Label text="Configurações" styleClass="card-title"/>
             <Label text="Preferências" styleClass="card-description" wrapText="true"/>
         </VBox>

@@ -25,6 +25,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
 
 <!-- ===========================================
@@ -33,22 +34,17 @@
 <HBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="br.com.suptec.controllers.components.HeaderController"
       styleClass="menu-header"
-      alignment="CENTER_LEFT"
+      alignment="CENTER"
       spacing="20">
     <!-- Padding interno para espaçamento -->
     <padding>
-        <Insets top="20" right="30" bottom="20" left="30"/>
+        <Insets top="5" right="30" bottom="5" left="30"/>
     </padding>
 
     <!-- ===========================================
-         SEÇÃO DO TÍTULO - Lado esquerdo do header
+         LOGO DA APLICAÇÃO - Centro do header
          =========================================== -->
-    <VBox spacing="5">
-        <!-- Título principal da aplicação -->
-        <Label text="SUPTEC" styleClass="header-title"/>
-        <!-- Subtítulo descritivo -->
-        <Label text="Sistema de Chamados Técnicos" styleClass="header-subtitle"/>
-    </VBox>
+    <ImageView fx:id="imgLogo" fitWidth="120" fitHeight="120" preserveRatio="true" smooth="true"/>
 
     <!-- ===========================================
          ESPAÇADOR FLEXÍVEL - Ocupa espaço disponível
@@ -64,6 +60,6 @@
         <!-- Label que exibe o nome do usuário logado -->
         <Label fx:id="lblUsuarioLogado" styleClass="user-label"/>
         <!-- Botão de logout para encerrar sessão -->
-        <Button text="Sair" onAction="#handleLogout" styleClass="btn-secondary"/>
+        <Button text="Sair" onAction="#handleLogout" styleClass="btn-danger"/>
     </HBox>
 </HBox>

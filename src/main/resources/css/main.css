@@ -45,3 +45,6 @@
 
 /* Menu principal - estilos do menu e seus componentes */
 @import "menu.css";
+
+/* Formulários de usuários - estilos unificados para todas as telas de usuário */
+@import "user-forms.css";

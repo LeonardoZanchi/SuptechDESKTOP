@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 import br.com.suptec.core.SceneManager;
-import br.com.suptec.services.UsuarioService;
+import br.com.suptec.services.AuthService;
 import br.com.suptec.utils.AlertUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,7 @@ public class LoginController implements Initializable {
     @FXML private CheckBox chkLembrar;
     @FXML private ImageView imgLogo;
 
-    private final UsuarioService usuarioService = new UsuarioService();
+    private final AuthService authService = AuthService.getInstance();
     private final Preferences prefs = Preferences.userNodeForPackage(LoginController.class);
 
     @Override
@@ -48,24 +48,48 @@ public class LoginController implements Initializable {
 
     @FXML
     private void onLogin() {
-        String usuario = txtUsuario.getText().trim();
+        String email = txtUsuario.getText().trim();
         String senha = txtSenha.getText().trim();
 
-        boolean valido = usuarioService.validarLogin(usuario, senha);
+        // Validar campos obrigatórios
+        if (email.isEmpty() || senha.isEmpty()) {
+            AlertUtils.showWarning("Campos obrigatórios", "Por favor, preencha email e senha.");
+            return;
+        }
+
+        // Validar formato de email básico
+        if (!email.contains("@") || !email.contains(".")) {
+            AlertUtils.showWarning("Email inválido", "Por favor, digite um email válido.");
+            return;
+        }
+
+        // Validar login através da API (apenas gerentes)
+        boolean valido = authService.validarLogin(email, senha);
         if (valido) {
             // Salvar preferência de lembrar usuário
             prefs.putBoolean("lembrar_usuario", chkLembrar.isSelected());
             if (chkLembrar.isSelected()) {
-                prefs.put("usuario", usuario);
+                prefs.put("usuario", email);
             } else {
                 prefs.remove("usuario");
             }
 
-            // Navegar para o menu principal
+            // Obter nome do usuário
+            String nomeUsuario = authService.getNomeUsuarioLogado();
+
+            // Exibir mensagem de boas-vindas para gerente
+            AlertUtils.showInfo("Acesso Autorizado!", 
+                "Bem-vindo ao SUPTEC Desktop, " + nomeUsuario + "!\n\n" +
+                "Acesso de gerente confirmado.\n" +
+                "Você será redirecionado para o painel administrativo.");
+
+            // Navegar para o menu principal com dimensões ampliadas e sem permitir maximizar
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
-            SceneManager.loadScene(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal");
+            SceneManager.loadScene(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal", 1600, 1000, true, false);
         } else {
-            AlertUtils.showError("Credenciais inválidas", "Usuário ou senha incorretos.");
+            AlertUtils.showError("Acesso Negado", 
+                "Acesso restrito apenas para gerentes.\n\n" +
+                "Usuários técnicos e comuns devem usar o aplicativo mobile ou web.");
         }
     }
 }

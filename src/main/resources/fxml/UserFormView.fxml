@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.suptec.controllers.UserFormController"
+            styleClass="user-edit-container"
+            stylesheets="@../css/main.css"
+            prefWidth="700"
+            prefHeight="750">
+
+    <!-- Cabeçalho -->
+    <top>
+        <VBox styleClass="header-container">
+            <Label text="Novo Usuário" styleClass="page-title"/>
+            <Label text="Cadastrar um novo usuário no sistema SUPTEC" styleClass="page-subtitle"/>
+            <Separator styleClass="separator"/>
+        </VBox>
+    </top>
+
+    <!-- Formulário Central com Scroll -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="scroll-pane">
+            <VBox spacing="25" styleClass="form-container">
+            
+            <!-- Tipo de Usuário - Primeira seção -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="TIPO DE ACESSO" styleClass="section-title"/>
+                
+                <VBox spacing="8" styleClass="type-selection-section">
+                    <Label text="Tipo de Usuário *" styleClass="form-label"/>
+                    <ComboBox fx:id="cmbTipoUsuario" 
+                             promptText="Selecione o tipo de usuário no sistema"
+                             styleClass="form-input" 
+                             maxWidth="Infinity"/>
+                    <Label text="O tipo de usuário determina as permissões e funcionalidades disponíveis" 
+                           styleClass="hint-text">
+                        <padding>
+                            <Insets left="5"/>
+                        </padding>
+                    </Label>
+                </VBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Informações Pessoais -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="INFORMAÇÕES PESSOAIS" styleClass="section-title"/>
+                
+                <!-- Nome -->
+                <VBox spacing="8">
+                    <Label text="Nome Completo *" styleClass="form-label"/>
+                    <TextField fx:id="txtNome" 
+                              promptText="Digite o nome completo do usuário"
+                              styleClass="form-input"/>
+                </VBox>
+
+                <!-- Email -->
+                <VBox spacing="8">
+                    <Label text="Email *" styleClass="form-label"/>
+                    <TextField fx:id="txtEmail" 
+                              promptText="Digite o endereço de email para login"
+                              styleClass="form-input"/>
+                </VBox>
+
+                <!-- Telefone -->
+                <VBox spacing="8">
+                    <Label text="Telefone *" styleClass="form-label"/>
+                    <TextField fx:id="txtTelefone" 
+                              promptText="(00) 00000-0000"
+                              styleClass="form-input"/>
+                </VBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Informações Profissionais -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="INFORMAÇÕES PROFISSIONAIS" styleClass="section-title"/>
+                
+                <!-- Setor (condicional - para Gerentes e Usuários) -->
+                <VBox fx:id="vboxSetor" spacing="8" managed="false" visible="false" styleClass="conditional-section">
+                    <Label text="Setor *" styleClass="form-label"/>
+                    <TextField fx:id="txtSetor" 
+                              promptText="Digite o setor de trabalho"
+                              styleClass="form-input"/>
+                </VBox>
+
+                <!-- Especialidade (condicional - para Técnicos) -->
+                <VBox fx:id="vboxEspecialidade" spacing="8" managed="false" visible="false" styleClass="conditional-section">
+                    <Label text="Especialidade *" styleClass="form-label"/>
+                    <TextField fx:id="txtEspecialidade" 
+                              promptText="Digite a área de especialidade técnica"
+                              styleClass="form-input"/>
+                </VBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Segurança -->
+            <VBox spacing="15" styleClass="form-section">
+                <Label text="SEGURANÇA E ACESSO" styleClass="section-title"/>
+                
+                <!-- Senha -->
+                <VBox spacing="8">
+                    <Label text="Senha *" styleClass="form-label"/>
+                    <PasswordField fx:id="txtSenha" 
+                                  promptText="Digite uma senha segura (mínimo 6 caracteres)"
+                                  styleClass="form-input"/>
+                </VBox>
+                
+                <!-- Dica sobre senha -->
+                <VBox spacing="5" styleClass="password-hint">
+                    <Label text="💡 Dica de Segurança:" styleClass="hint-text" style="-fx-font-weight: bold;"/>
+                    <Label text="• Use pelo menos 6 caracteres" styleClass="hint-text"/>
+                    <Label text="• Combine letras, números e símbolos" styleClass="hint-text"/>
+                    <Label text="• Evite informações pessoais óbvias" styleClass="hint-text"/>
+                </VBox>
+            </VBox>
+
+            <!-- Observação sobre campos obrigatórios -->
+            <HBox alignment="CENTER_LEFT" spacing="8" styleClass="required-note">
+                <padding>
+                    <Insets top="15"/>
+                </padding>
+                <Label text="*" styleClass="required-asterisk"/>
+                <Label text="Campos obrigatórios" styleClass="hint-text"/>
+            </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+    <!-- Botões de Ação -->
+    <bottom>
+        <HBox spacing="20" alignment="CENTER" styleClass="button-container">
+            <Button fx:id="btnSalvar" 
+                   text="Criar Usuário" 
+                   onAction="#handleSalvar"
+                   styleClass="btn-primary"
+                   prefWidth="180"/>
+            
+            <Button fx:id="btnCancelar" 
+                   text="Cancelar" 
+                   onAction="#handleCancelar"
+                   styleClass="btn-secondary"
+                   prefWidth="150"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
