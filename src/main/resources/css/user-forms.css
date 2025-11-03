@@ -379,6 +379,7 @@
     -fx-font-weight: bold;
     -fx-font-family: "Segoe UI";
     -fx-padding: 15 10;
+    -fx-alignment: CENTER; /* centraliza os cabeçalhos também */
 }
 
 .user-table .column-header .label {
@@ -387,7 +388,9 @@
 }
 
 .user-table .table-cell {
-    -fx-padding: 12 10;
+    /* Centraliza o conteúdo das células para alinhar com os cabeçalhos */
+    -fx-padding: 12 10; /* padding uniforme */
+    -fx-alignment: CENTER; /* centraliza tanto vertical quanto horizontalmente */
     -fx-font-size: 13px;
     -fx-text-fill: -fx-color-primary;
     -fx-border-color: transparent transparent -fx-color-border transparent;

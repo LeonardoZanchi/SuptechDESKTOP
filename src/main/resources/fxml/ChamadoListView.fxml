@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===========================================
+     CHAMADO LIST VIEW - Tela de Listagem de Chamados
+     ===========================================
+     Este arquivo define o layout da tela de listagem de chamados.
+     Responsabilidades:
+     - Exibir tabela com lista de chamados
+     - Permitir busca e filtro por prioridade
+     - Fornecer ações de visualizar, editar e excluir
+     - Exibir informações: ID, titulo, prioridade, usuario, email, setor, data
+
+     Estrutura:
+     - TOP: Cabeçalho com título e botão voltar
+     - CENTER: Campo de busca com filtro, tabela de chamados e contador
+     - BOTTOM: Barra de ações (informações, editar, excluir, atualizar)
+
+     Controller: ChamadoListController - gerencia a lógica da listagem
+     =========================================== -->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.suptec.controllers.ChamadoListController"
+            styleClass="user-edit-container"
+            stylesheets="@../css/main.css"
+            prefWidth="1600"
+            prefHeight="1000">
+
+    <!-- ===========================================
+         REGIÃO SUPERIOR - Cabeçalho
+         =========================================== -->
+    <top>
+        <VBox styleClass="header-container">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Button fx:id="btnVoltar" 
+                        text="Voltar" 
+                        onAction="#handleVoltar"
+                        styleClass="btn-back"/>
+                
+                <VBox>
+                    <Label text="Gerenciamento de Chamados" styleClass="page-title"/>
+                    <Label text="Visualize e gerencie todos os chamados do sistema" styleClass="page-subtitle"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ===========================================
+         REGIÃO CENTRAL - Conteúdo Principal
+         =========================================== -->
+    <center>
+        <VBox spacing="20" styleClass="form-container">
+
+            <!-- Barra de Busca -->
+            <VBox spacing="8">
+                <Label text="BUSCAR CHAMADOS" styleClass="section-title"/>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <TextField fx:id="searchField"
+                              promptText="Digite titulo, descricao, usuario, email ou setor..."
+                              styleClass="search-field"
+                              HBox.hgrow="ALWAYS"/>
+                    
+                    <ComboBox fx:id="filtroPrioridade"
+                             promptText="Prioridade"
+                             styleClass="filter-combo"
+                             prefWidth="130"/>
+                    
+                    <Button fx:id="btnAtualizar"
+                            text="Atualizar"
+                            onAction="#handleAtualizar"
+                            styleClass="btn-secondary"
+                            prefWidth="100"/>
+                </HBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Separator styleClass="form-separator"/>
+
+            <!-- Informações e Tabela -->
+            <VBox spacing="15">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="totalChamadosLabel" 
+                           text="0 chamado(s) encontrado(s)"
+                           styleClass="info-label"/>
+                </HBox>
+
+                <!-- Tabela de Chamados -->
+                <TableView fx:id="chamadoTable" 
+                          VBox.vgrow="ALWAYS"
+                          styleClass="user-table"
+                          prefHeight="400">
+                    
+                    <columns>
+                        <TableColumn fx:id="colId" 
+                                    text="ID" 
+                                    sortable="false"
+                                    prefWidth="60"/>
+                        
+                        <TableColumn fx:id="colTitulo" 
+                                    text="Titulo" 
+                                    sortable="true"
+                                    prefWidth="220"/>
+                        
+                        <TableColumn fx:id="colPrioridade" 
+                                    text="Prioridade" 
+                                    sortable="true"
+                                    prefWidth="90"/>
+                        
+                        <TableColumn fx:id="colStatus"
+                                    text="Status"
+                                    sortable="true"
+                                    prefWidth="90"/>
+                        
+                        <TableColumn fx:id="colNomeUsuario" 
+                                    text="Usuario" 
+                                    sortable="true"
+                                    prefWidth="160"/>
+                        
+                        <TableColumn fx:id="colEmailUsuario" 
+                                    text="Email" 
+                                    sortable="true"
+                                    prefWidth="180"/>
+                        
+                        <TableColumn fx:id="colSetorUsuario" 
+                                    text="Setor" 
+                                    sortable="true"
+                                    prefWidth="110"/>
+                        
+                        <TableColumn fx:id="colDataAbertura" 
+                                    text="Data" 
+                                    sortable="true"
+                                    prefWidth="80"/>
+                    </columns>
+                    
+                    <!-- Mensagem quando não há dados -->
+                    <placeholder>
+                        <Label text="Nenhum chamado encontrado" styleClass="hint-text" style="-fx-font-size: 16px;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+
+    <!-- ===========================================
+         REGIÃO INFERIOR - Barra de Ações
+         =========================================== -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER" styleClass="button-container">
+
+            <Button fx:id="btnInformacoes"
+                    text="Informacoes"
+                    onAction="#handleVisualizarDetalhes"
+                    styleClass="btn-secondary"
+                    prefWidth="130"/>
+
+            <Button fx:id="btnEditar"
+                    text="Editar"
+                    onAction="#handleEditar"
+                    styleClass="btn-secondary"
+                    prefWidth="120"/>
+
+            <Button fx:id="btnExcluir"
+                    text="Excluir"
+                    onAction="#handleExcluir"
+                    styleClass="btn-danger"
+                    prefWidth="120"/>
+
+        </HBox>
+    </bottom>
+
+</BorderPane>

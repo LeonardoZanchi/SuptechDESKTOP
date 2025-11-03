@@ -10,6 +10,7 @@ public class UsuarioResponse {
     @SerializedName("usuarioID")
     private String id;
     private String nome;
+    
     private String email;
     private String telefone;
     private String setor;

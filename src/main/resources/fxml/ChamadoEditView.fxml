@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="br.com.suptec.controllers.ChamadoEditController"
+            styleClass="user-edit-container"
+            stylesheets="@../css/main.css"
+            prefWidth="800"
+            prefHeight="700">
+
+    <top>
+        <VBox styleClass="header-container">
+            <Label text="Editar Chamado" styleClass="page-title"/>
+            <Label fx:id="lblSubtitulo" text="Modificar informações do chamado selecionado" styleClass="page-subtitle"/>
+            <Separator styleClass="separator"/>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="scroll-pane">
+            <VBox spacing="20" styleClass="form-container">
+
+                <VBox spacing="12" styleClass="form-section">
+                    <Label text="INFORMAÇÕES DO CHAMADO" styleClass="section-title"/>
+
+                    <VBox spacing="8">
+                        <Label text="Titulo *" styleClass="form-label"/>
+                        <TextField fx:id="txtTitulo" promptText="Digite o título do chamado" styleClass="form-input"/>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Prioridade *" styleClass="form-label"/>
+                        <ComboBox fx:id="cmbPrioridade" promptText="Selecione prioridade" styleClass="form-input" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Status *" styleClass="form-label"/>
+                        <ComboBox fx:id="cmbStatus" promptText="Selecione status" styleClass="form-input" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Data de Abertura" styleClass="form-label"/>
+                        <Label fx:id="lblDataAbertura" text="N/A" styleClass="form-input"/>
+                    </VBox>
+                </VBox>
+
+                <Separator styleClass="form-separator"/>
+
+                <VBox spacing="12" styleClass="form-section">
+                    <Label text="USUÁRIO" styleClass="section-title"/>
+
+                    <HBox spacing="20">
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Nome" styleClass="form-label"/>
+                            <Label fx:id="lblNomeUsuario" text="N/A" styleClass="form-input"/>
+                        </VBox>
+
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Email" styleClass="form-label"/>
+                            <Label fx:id="lblEmailUsuario" text="N/A" styleClass="form-input"/>
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="8">
+                        <Label text="Setor" styleClass="form-label"/>
+                        <Label fx:id="lblSetorUsuario" text="N/A" styleClass="form-input"/>
+                    </VBox>
+                </VBox>
+
+                <Separator styleClass="form-separator"/>
+
+                <VBox spacing="12" styleClass="form-section">
+                    <Label text="DESCRIÇÃO" styleClass="section-title"/>
+                    <TextArea fx:id="txtDescricao" promptText="Descreva o problema ou solicitação" styleClass="form-input" prefRowCount="6" wrapText="true"/>
+                </VBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="8" styleClass="required-note">
+                    <padding>
+                        <Insets top="8"/>
+                    </padding>
+                    <Label text="*" styleClass="required-asterisk"/>
+                    <Label text="Campos obrigatórios" styleClass="hint-text"/>
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="20" alignment="CENTER" styleClass="button-container">
+            <Button text="Salvar Alterações" onAction="#handleSalvar" styleClass="btn-primary" prefWidth="200"/>
+            <Button text="Cancelar" onAction="#handleCancelar" styleClass="btn-secondary" prefWidth="150"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

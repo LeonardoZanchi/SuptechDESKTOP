@@ -53,7 +53,7 @@ public class AuthService {
 
             // Fazer chamada para API específica de desktop (só gerentes)
             // Codificar o espaço na URL como %20
-            ApiResponse response = apiService.post("AuthDesktop/Login%20Desktop", jsonRequest);
+            ApiResponse response = apiService.post("AuthDesktop/LoginDesktop", jsonRequest);
             
             System.out.println("Status da resposta: " + response.getStatusCode());
             System.out.println("Corpo da resposta: " + response.getBody());

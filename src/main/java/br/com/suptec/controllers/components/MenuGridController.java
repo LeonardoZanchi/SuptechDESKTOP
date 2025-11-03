@@ -23,8 +23,20 @@ public class MenuGridController {
     }
 
     @FXML
-    private void handleChamados() {
-        AlertUtils.showInfo("Chamados", "Módulo em desenvolvimento.");
+    private void handleChamados(MouseEvent event) {
+        try {
+            System.out.println("=== Abrindo tela de chamados ===");
+            // Obter o Stage atual através do evento
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            System.out.println("Stage obtido: " + stage);
+            // Carregar a tela de lista de chamados com as mesmas dimensões do menu principal
+            SceneManager.loadScene(stage, "/fxml/ChamadoListView.fxml", "SUPTEC - Gerenciamento de Chamados", 1600, 1000, false, false);
+            System.out.println("Tela carregada com sucesso!");
+        } catch (Exception e) {
+            System.err.println("Erro ao abrir tela de chamados: " + e.getMessage());
+            e.printStackTrace();
+            AlertUtils.showError("Erro", "Nao foi possivel abrir a tela de chamados.");
+        }
     }
 
     @FXML
