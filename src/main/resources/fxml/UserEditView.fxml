@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- ==================================================
+    USER EDIT VIEW - Tela de Edição de Usuários
+    ==================================================
+    Interface utilizada para editar informações de um usuário existente.
+
+    Responsabilidades:
+    - Exibir campos pessoais e profissionais do usuário
+    - Permitir alteração de dados e (opcionalmente) troca de senha
+    - Validar entradas via FieldValidator/ValidationUtils (no controller)
+
+    Controller: br.com.suptec.controllers.UserEditController
+    Elementos importantes (fx:id):
+    - txtNome, txtEmail, txtTelefone : campos de dados pessoais
+    - cmbTipo : tipo do usuário (GERENTE, TECNICO, USUARIO)
+    - vboxSetor, vboxEspecialidade : seções condicionais exibidas conforme o tipo
+    - chkAlterarSenha, txtNovaSenha, txtConfirmarSenha : controles de senha
+    - handleSalvar / handleCancelar : handlers para ações principais
+
+    Observações:
+    - O arquivo usa ScrollPane para garantir usabilidade em telas menores.
+-->
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.com.suptec.controllers.UserEditController"
-            styleClass="user-edit-container"
-            stylesheets="@../css/main.css"
-            prefWidth="700"
-            prefHeight="700">
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="br.com.suptec.controllers.UserEditController"
+          styleClass="user-edit-container"
+          stylesheets="@../css/main.css"
+          prefWidth="700"
+          prefHeight="700">
 
     <!-- Cabeçalho -->
     <top>

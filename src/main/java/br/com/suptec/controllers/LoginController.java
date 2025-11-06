@@ -16,6 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * Controller da tela de login.
+ * Responsável por validar credenciais, controlar preferência "lembrar usuário"
+ * e redirecionar para o menu principal quando o login for bem-sucedido.
+ */
 public class LoginController implements Initializable {
 
     @FXML private TextField txtUsuario;

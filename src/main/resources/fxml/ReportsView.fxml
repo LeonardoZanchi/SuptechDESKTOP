@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==================================================
+         REPORTS VIEW - Tela de Relatórios e KPIs
+         ==================================================
+         Layout para exibir indicadores e gráficos relacionados aos chamados
+         e usuários.
+
+         Responsabilidades:
+         - Exibir KPIs resumidos (total, fechados, pendentes, técnicos ativos)
+         - Mostrar gráficos: Pizza (status), Barra (prioridade), Linha (mensal)
+         - Fornecer insights com badges e mensagens contextuais
+
+         Controller: br.com.suptec.controllers.ReportsController
+         Elementos importantes (fx:id):
+         - lblTotalChamados, lblFechados, lblPendentes, lblTecnicos, lblUsuariosComuns
+         - pieStatus, barPrioridade, lineMonthly
+         - insightsContainer : VBox onde são adicionados nós dinâmicos (insights)
+
+         Observações:
+         - A população dos gráficos é feita dinamicamente no controller a partir
+             de serviços (ChamadoService, UserManagementService).
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="br.com.suptec.controllers.ReportsController"
+                        styleClass="user-edit-container" stylesheets="@../css/main.css" prefWidth="1200" prefHeight="800">
+
+    <top>
+        <VBox spacing="10" styleClass="header-container">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Button text="← Voltar" onAction="#handleVoltar" styleClass="btn-back"/>
+                <VBox>
+                    <Label text="Relatórios" styleClass="page-title"/>
+                    <Label text="Visão geral dos chamados e usuários" styleClass="page-subtitle"/>
+                </VBox>
+            </HBox>
+            <Separator styleClass="separator"/>
+
+            <!-- KPIs -->
+            <HBox spacing="16" styleClass="kpi-container">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <VBox spacing="6" styleClass="kpi-card" HBox.hgrow="ALWAYS">
+                    <Label text="Total de Chamados" styleClass="kpi-title"/>
+                    <Label fx:id="lblTotalChamados" text="0" styleClass="kpi-value"/>
+                </VBox>
+
+                <VBox spacing="4" styleClass="kpi-card" HBox.hgrow="ALWAYS">
+                    <Label text="Chamados Fechados / Pendentes" styleClass="kpi-title"/>
+                    <HBox spacing="8">
+                        <Label fx:id="lblFechados" text="0" styleClass="kpi-value"/>
+                        <Label text="/" styleClass="kpi-value"/>
+                        <Label fx:id="lblPendentes" text="0" styleClass="kpi-value"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="6" styleClass="kpi-card" HBox.hgrow="ALWAYS">
+                    <Label text="Técnicos Ativos" styleClass="kpi-title"/>
+                    <Label fx:id="lblTecnicos" text="0" styleClass="kpi-value"/>
+                </VBox>
+
+                <VBox spacing="6" styleClass="kpi-card" HBox.hgrow="ALWAYS">
+                    <Label text="Usuários Comuns" styleClass="kpi-title"/>
+                    <Label fx:id="lblUsuariosComuns" text="0" styleClass="kpi-value"/>
+                </VBox>
+
+                <Button text="Atualizar" onAction="#handleAtualizar" styleClass="btn-secondary"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane orientation="HORIZONTAL">
+            <VBox spacing="16" VBox.vgrow="ALWAYS" prefWidth="760" prefHeight="640">
+                <padding>
+                    <Insets top="14" right="14" bottom="14" left="14"/>
+                </padding>
+                <Label text="Distribuição por Status" styleClass="section-title"/>
+                <PieChart fx:id="pieStatus" prefHeight="300"/>
+
+                <Label text="Chamados por Prioridade" styleClass="section-title"/>
+                <BarChart fx:id="barPrioridade" prefHeight="300">
+                    <xAxis>
+                        <CategoryAxis fx:id="xAxis" label="Prioridade" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" label="Quantidade" />
+                    </yAxis>
+                </BarChart>
+            </VBox>
+
+            <VBox spacing="16" VBox.vgrow="ALWAYS" prefWidth="420" prefHeight="640">
+                <padding>
+                    <Insets top="14" right="14" bottom="14" left="14"/>
+                </padding>
+                <Label text="Insights" styleClass="section-title"/>
+                <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="scroll-pane" prefHeight="420">
+                    <content>
+                        <VBox fx:id="insightsContainer" spacing="10" styleClass="insights-text" prefWidth="380" VBox.vgrow="ALWAYS"/>
+                    </content>
+                </ScrollPane>
+                
+                <Label text="Relatório Mensal" styleClass="section-title"/>
+                <LineChart fx:id="lineMonthly" prefHeight="240">
+                    <VBox.margin>
+                        <Insets top="12" />
+                    </VBox.margin>
+                    <xAxis>
+                        <CategoryAxis fx:id="lineXAxis" label="Mês" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="lineYAxis" label="Chamados" />
+                    </yAxis>
+                </LineChart>
+            </VBox>
+        </SplitPane>
+    </center>
+
+</BorderPane>

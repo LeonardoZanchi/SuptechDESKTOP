@@ -1,10 +1,25 @@
-/* ===============================
-   USER FORMS STYLES - Estilos das Telas de Usuário
-   =======================================
-   Define estilos específicos para as telas de edição e cadastro de usuários,
-   mantendo consistência visual com o resto da aplicação.
-   Inclui layout do formulário, campos especiais e estados visuais.
-   =============================== */
+/* ======================================================
+     USER FORMS STYLES - Estilos das Telas de Usuário
+     ======================================================
+     Este arquivo contém estilos CSS usados nas telas de usuário
+     (criação/edição/listagem) da aplicação JavaFX.
+
+     Notas importantes:
+     - As regras usam variáveis de tema/custom properties (ex.: -fx-color-primary,
+         -fx-color-background) definidas em outro arquivo (provavelmente main.css).
+         Para alterar o tema global, edite as variáveis centrais e não cada classe
+         individualmente.
+     - As classes aqui são atribuídas aos containers/fx:id em arquivos FXML.
+         Procure pelos nomes (ex.: .form-container, .page-title) nos FXML para ver
+         onde cada estilo é aplicado.
+     - Este arquivo visa somente aparência; não altera comportamento Java/FX.
+
+     Conteúdo:
+     - Estrutura de formulário e cabeçalho
+     - Campos de entrada e estados (focus/error)
+     - Componentes de KPI/insights
+     - Botões, tabelas e responsividade
+*/
 
 /* ===============================
    CONTAINER PRINCIPAL DAS TELAS DE USUÁRIO
@@ -117,6 +132,121 @@
     -fx-border-width: 2;
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(10,46,80,0.15), 8, 0.6, 0, 2);
+}
+
+/* KPI cards displayed in the header */
+.kpi-container {
+    -fx-padding: 8 12;
+}
+
+.kpi-card {
+    -fx-background-color: rgba(255,255,255,0.10);
+    -fx-background-radius: 10;
+    -fx-padding: 14 18;
+    -fx-alignment: CENTER_LEFT;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.4, 0, 2);
+}
+
+.kpi-title {
+    -fx-font-size: 12px;
+    -fx-text-fill: rgba(255,255,255,0.95);
+    -fx-font-weight: 600;
+}
+
+.kpi-value {
+    -fx-font-size: 22px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+/* garantir prioridade de leitura sobre o header azul */
+.header-container .kpi-value {
+    -fx-text-fill: #ffffff;
+}
+.header-container .kpi-title {
+    -fx-text-fill: rgba(255,255,255,0.95);
+}
+
+.kpi-green { -fx-text-fill: #2ecc71; }
+.kpi-red { -fx-text-fill: #e74c3c; }
+
+/* Insights text */
+.insights-text {
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: -fx-color-primary;
+    -fx-background-color: -fx-color-field-bg;
+    -fx-control-inner-background: -fx-color-field-bg;
+    -fx-padding: 12 14;
+}
+
+/* Estilos internos para o container de insights (linhas e badges)
+   usando classes já existentes para manter consistência visual */
+.insights-text {
+    -fx-background-color: -fx-color-field-bg;
+    -fx-background-radius: 10;
+    -fx-padding: 14;
+}
+
+.insights-text .info-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -fx-color-primary;
+}
+
+.insights-text .kpi-value {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-color-primary-dark;
+    -fx-background-color: rgba(10,46,80,0.06);
+    -fx-padding: 6 8;
+    -fx-background-radius: 6;
+}
+
+.insights-text .insight-total {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-color-primary-dark;
+}
+
+.insights-text .kpi-red {
+    -fx-text-fill: #e74c3c;
+}
+
+.insights-text .kpi-green {
+    -fx-text-fill: #2ecc71;
+}
+
+/* Back button small style */
+.btn-back {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0A2E50; /* dark blue for visibility on light backgrounds */
+    -fx-font-weight: bold;
+    -fx-border-color: rgba(10,46,80,0.08);
+    -fx-border-radius: 6;
+    -fx-padding: 6 10;
+    -fx-cursor: hand;
+}
+.btn-back:hover {
+    -fx-background-color: rgba(10,46,80,0.04);
+}
+
+/* Título específico da tela de configurações (sobrescreve .page-title branco) */
+.config-page-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0A2E50;
+    -fx-font-family: "Segoe UI";
+}
+
+/* Garantir que o botão de voltar seja visível no cabeçalho (fundo escuro) */
+.header-container .btn-back {
+    -fx-text-fill: white;
+    -fx-border-color: rgba(255,255,255,0.15);
+}
+
+.header-container .btn-back:hover {
+    -fx-background-color: rgba(255,255,255,0.06);
 }
 
 /* ===============================

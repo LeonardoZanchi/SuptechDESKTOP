@@ -35,10 +35,10 @@
     <top>
         <VBox styleClass="header-container">
             <HBox alignment="CENTER_LEFT" spacing="20">
-                <Button fx:id="btnVoltar" 
-                        text="Voltar" 
-                        onAction="#handleVoltar"
-                        styleClass="btn-back"/>
+        <Button fx:id="btnVoltar" 
+            text="← Voltar" 
+            onAction="#handleVoltar"
+            styleClass="btn-back"/>
                 
                 <VBox>
                     <Label text="Gerenciamento de Chamados" styleClass="page-title"/>

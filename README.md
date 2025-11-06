@@ -78,6 +78,10 @@ suptec-desktop/
 │       │   │   ├── UserListController.java           # Controller da listagem de usuários
 │       │   │   ├── UserFormController.java           # Controller do cadastro de usuários
 │       │   │   ├── UserEditController.java           # Controller da edição de usuários
+│       │   │   ├── ChamadoListController.java       # Controller da listagem de chamados
+│       │   │   ├── ChamadoEditController.java       # Controller de edição/visualização de chamados
+│       │   │   ├── ReportsController.java           # Controller dos relatórios/dashboards
+│       │   │   ├── ConfigController.java            # Controller da tela de configurações
 │       │   │   ├── components/                       # Controllers de componentes modulares
 │       │   │   │   ├── HeaderController.java         # Controller do cabeçalho
 │       │   │   │   └── MenuGridController.java       # Controller do grid de cards
@@ -105,7 +109,8 @@ suptec-desktop/
 │       │   └── utils/
 │       │       ├── AlertUtils.java                   # Utilitários para alertas e diálogos
 │       │       ├── JsonUtils.java                    # Utilitários para manipulação JSON
-│       │       └── FieldValidator.java               # Validadores de campos de formulário
+│       │       ├── FieldValidator.java               # Validadores de campos de formulário
+│       │       └── SettingsService.java              # Persistência local de preferências (Properties)
 │       └── resources/
 │           ├── css/                          # Sistema de estilos CSS modular
 │           │   ├── main.css                  # Arquivo principal que importa todos
@@ -126,6 +131,7 @@ suptec-desktop/
 │           │   ├── UserFormView.fxml         # Tela de cadastro de usuário (estilizada)
 │           │   ├── UserEditView.fxml         # Tela de edição de usuário (estilizada)
 │           │   ├── UserListView.fxml         # Tela de listagem de usuários
+│           │   ├── ConfigView.fxml           # Tela de configurações (tema/idioma/autosave)
 │           │   └── components/               # Componentes FXML modulares
 │           │       ├── Header.fxml           # Cabeçalho reutilizável
 │           │       ├── Footer.fxml           # Rodapé informativo
@@ -135,13 +141,13 @@ suptec-desktop/
 │               ├── LogoPrincipal.jpg         # Logo principal da aplicação
 │               └── LogoSuptechLogin.jpg      # Logo específica para login
 └── target/                                   # Arquivos gerados pelo Maven
-    ├── classes/                              # Classes Java compiladas
-    ├── css/                                  # Recursos CSS copiados
-    ├── fxml/                                 # Recursos FXML copiados
-    ├── images/                               # Imagens copiadas
-    ├── generated-sources/annotations/        # Código gerado
-    ├── maven-status/                         # Status do build Maven
-    └── suptec-desktop-1.0.0.jar              # JAR executável final
+  ├── classes/                              # Classes Java compiladas
+  ├── css/                                  # Recursos CSS copiados
+  ├── fxml/                                 # Recursos FXML copiados
+  ├── images/                               # Imagens copiadas
+  ├── generated-sources/annotations/        # Código gerado
+  ├── maven-status/                         # Status do build Maven
+  └── suptec-desktop-1.0.0.jar              # JAR executável final
 ```
 
 ## Como Executar
@@ -231,18 +237,18 @@ O projeto utiliza um sistema CSS completamente modular:
 8. **menu-header.css** - Cabeçalho do menu
 9. **menu-cards.css** - Cards interativos
 10. **menu-layout.css** - Layout e rodapé
-11. **user-forms.css** - Sistema unificado para todas as telas de usuário
+11. **user-forms.css** - Sistema unificado para todas as telas
 
-## 🎨 **Melhorias Visuais Implementadas (v1.1)**
+## **Melhorias Visuais Implementadas (v1.1)**
 
 ### **Sistema Unificado de Telas de Usuário**
-- ✅ **Interface Consistente**: Padrão visual unificado entre listagem, cadastro e edição
-- ✅ **Organização por Seções**: Agrupamento lógico em "Informações Pessoais", "Profissionais" e "Segurança"
-- ✅ **Cabeçalhos Modernos**: Fundo gradiente azul com títulos e subtítulos informativos
-- ✅ **Campos Condicionais Destacados**: Seções especiais com fundo diferenciado para campos específicos por tipo
-- ✅ **Feedback Visual Aprimorado**: Bordas azuis, sombras e transições suaves
-- ✅ **Dicas de Segurança**: Orientações visuais para criação de senhas seguras
-- ✅ **Responsividade**: Layout adaptativo para diferentes resoluções
+-  **Interface Consistente**: Padrão visual unificado entre listagem, cadastro e edição
+-  **Organização por Seções**: Agrupamento lógico em "Informações Pessoais", "Profissionais" e "Segurança"
+-  **Cabeçalhos Modernos**: Fundo gradiente azul com títulos e subtítulos informativos
+-  **Campos Condicionais Destacados**: Seções especiais com fundo diferenciado para campos específicos por tipo
+-  **Feedback Visual Aprimorado**: Bordas azuis, sombras e transições suaves
+-  **Dicas de Segurança**: Orientações visuais para criação de senhas seguras
+-  **Responsividade**: Layout adaptativo para diferentes resoluções
 
 ### **Componentes Visuais Modernos**
 - **Seções Categorizadas**: Visual organizado por tipo de informação
@@ -253,10 +259,10 @@ O projeto utiliza um sistema CSS completamente modular:
 - **Tabelas Estilizadas**: Headers azuis e hover effects para melhor usabilidade
 
 ### **Otimizações de CSS**
-- ✅ **Arquivo Unificado**: `user-forms.css` consolidou todos os estilos de usuário
-- ✅ **Eliminação de Redundância**: Removido `user-list.css` duplicado
-- ✅ **Manutenção Simplificada**: Estilos centralizados em um local
-- ✅ **Performance**: Menos arquivos CSS para carregar
+-  **Arquivo Unificado**: `user-forms.css` consolidou todos os estilos de usuário
+-  **Eliminação de Redundância**: Removido `user-list.css` duplicado
+-  **Manutenção Simplificada**: Estilos centralizados em um local
+-  **Performance**: Menos arquivos CSS para carregar
 
 ## Arquitetura da Aplicação
 
@@ -276,66 +282,68 @@ O projeto utiliza um sistema CSS completamente modular:
 - **SceneManager**: Navegação entre telas
 - **AlertUtils**: Diálogos padronizados
 
-## 📋 Funcionalidades Detalhadas
+##  Funcionalidades Detalhadas
 
 ### Tela de Login
-- ✅ Formulário com e-mail e senha
-- ✅ Checkbox "lembrar de mim"
-- ✅ Validação e feedback de erro
-- ✅ Carregamento automático de logo
-- ✅ Transição para menu principal
+-  Formulário com e-mail e senha
+-  Checkbox "lembrar de mim"
+-  Validação e feedback de erro
+-  Carregamento automático de logo
+-  Transição para menu principal
 
 ### Menu Principal
-- ✅ Cabeçalho com informações do usuário
-- ✅ Grid 2x2 de cards funcionais
-- ✅ Efeitos hover e cliques
-- ✅ Logout com confirmação
-- ✅ Rodapé informativo
+-  Cabeçalho com informações do usuário
+-  Grid 2x2 de cards funcionais
+-  Efeitos hover e cliques
+-  Logout com confirmação
+-  Rodapé informativo
 
 ### Cards do Menu
-- ✅ **Usuários**: Gerenciamento completo (listagem, cadastro, edição)
-- ✅ **Chamados**: Placeholder para sistema de chamados
-- ✅ **Relatórios**: Placeholder para dashboards
-- ✅ **Configurações**: Placeholder para preferências
+-  **Usuários**: Gerenciamento completo (listagem, cadastro, edição)
+-  **Chamados**: Sistema de chamados completo (criação, edição, alteração de status)
+-  **Relatórios**: Dashboards e KPIs implementados e funcionando
+-  **Configurações**: Interface de preferências implementada (UI); aplicação das preferências em runtime parcialmente funcional
 
 ### Gerenciamento de Usuários (IMPLEMENTADO v1.1)
-- ✅ **Cadastro de Usuários**: Interface moderna organizada por seções temáticas
-- ✅ **Edição de Usuários**: Tela profissional com campos preenchidos e validação
-- ✅ **Listagem de Usuários**: Tabela organizada com busca, filtros e ações
-- ✅ **Exclusão de Usuários**: Funcionalidade completa com confirmação e validações
-- ✅ **Validação Avançada**: Campos obrigatórios e feedback visual em tempo real
-- ✅ **Tipos de Usuário**: Admin, Gerente, Técnico, Usuário com campos específicos
-- ✅ **Gestão de Senhas**: Criação segura e alteração opcional com dicas de segurança
-- ✅ **Interface Responsiva**: Layout adaptativo e scroll personalizado
-- ✅ **Integração com API**: Conectado aos endpoints reais para CRUD completo
+-  **Cadastro de Usuários**: Interface moderna organizada por seções temáticas
+-  **Edição de Usuários**: Tela profissional com campos preenchidos e validação
+-  **Listagem de Usuários**: Tabela organizada com busca, filtros e ações
+-  **Exclusão de Usuários**: Funcionalidade completa com confirmação e validações
+-  **Validação Avançada**: Campos obrigatórios e feedback visual em tempo real
+-  **Tipos de Usuário**: Admin, Gerente, Técnico, Usuário com campos específicos
+-  **Gestão de Senhas**: Criação segura e alteração opcional com dicas de segurança
+-  **Interface Responsiva**: Layout adaptativo e scroll personalizado
+-  **Integração com API**: Conectado aos endpoints reais para CRUD completo
 
-## 🔮 Roadmap e Desenvolvimento Futuro
+### Configurações / Preferências (implementado — UI)
 
-### Próximas Implementações
-- ✅ **Módulo de Usuários**: CRUD completo implementado e funcional
-- 🔄 **API Integration**: Conectado com backend real (parcialmente implementado)
-- 🔄 **Sistema de Chamados**: Criação, edição, status
-- 🔄 **Dashboard de Relatórios**: Gráficos e estatísticas
-- 🔄 **Configurações**: Temas, preferências do usuário
+- Tela de configurações implementada com opções visuais de preferência:
+  - Tema do sistema: Claro / Escuro (radio buttons)
+  - Salvar alterações automaticamente: checkbox que persiste a preferência localmente
+  - Idioma da interface: ComboBox com Português / English (protótipo de i18n)
+  - Seção "Sobre o sistema" no rodapé com informações institucionais
 
-### Melhorias Planejadas
-- 🔄 **Banco de Dados**: Integração com SQL Server
-- 🔄 **Notificações**: Sistema de alertas em tempo real
-- 🔄 **Temas**: Modo escuro/claro
-- 🔄 **Multilingual**: Suporte a múltiplos idiomas
-- 🔄 **Logs**: Sistema de auditoria
+Observação importante: a interface de Configurações já existe e grava preferências localmente via `SettingsService`,
+porém a aplicação automática dessas preferências em tempo de execução (por exemplo, aplicar tema imediatamente ou
+trocar ResourceBundle de idioma dinamicamente) está parcialmente funcional e requer integração adicional.
 
-## 📊 Status do Projeto (v1.1)
+Implementação técnica relevante:
+- `br.com.suptec.utils.SettingsService` — serviço simples que grava/ler `Properties` em `user.home` (`.suptech_settings.properties`).
+- `br.com.suptec.controllers.ConfigController` — controller da tela de configurações que inicializa controles e persiste preferências.
+- Navegação: foi adicionada a função `SceneManager.replaceRootPreserveStage(...)` para preservar o tamanho da janela ao trocar de telas (substitui apenas o root da Scene existente).
 
-### ✅ Módulos Completos e Funcionais
 
-#### 🔐 Sistema de Autenticação
+## Status do Projeto (v1.1)
+
+### Módulos Completos e Funcionais
+
+####  Sistema de Autenticação
 - Interface de login profissional e responsiva
 - Validação completa de credenciais
 - Integração com API REST funcional
 - Tratamento de erros e feedback visual
 
-#### 👥 Gerenciamento de Usuários (100% Funcional)
+#### Gerenciamento de Usuários (100% Funcional)
 - **CRUD Completo**: Criação, listagem, edição e exclusão
 - **Interface Unificada**: Design consistente e profissional
 - **Funcionalidades Avançadas**:
@@ -345,60 +353,12 @@ O projeto utiliza um sistema CSS completamente modular:
   - Ações em lote com confirmações de segurança
   - Feedback visual para todas as operações
 
-#### 🎨 Sistema Visual (Otimizado)
+#### Sistema Visual (Otimizado)
 - **CSS Modular**: 10 arquivos organizados por responsabilidade
 - **Design System**: Paleta de cores e tipografia padronizadas
 - **Componentes Reutilizáveis**: Headers, cards, formulários unificados
 - **Responsividade**: Layouts adaptativos para diferentes resoluções
 
-#### 🔌 Integração com API (95% Completa)
-- Cliente HTTP configurado e testado
-- Endpoints mapeados para operações CRUD
-- Sistema de tratamento de erros robusto
-- Logs detalhados para debugging e monitoramento
-
-### 🚧 Em Desenvolvimento
-
-#### 📋 Sistema de Chamados (30% Completo)
-- Estrutura base implementada
-- Models e controllers parcialmente desenvolvidos
-- Interface aguardando integração final
-
-### 📈 Métricas de Qualidade
-
-| Aspecto | Status | Detalhes |
-|---------|--------|----------|
-| **Arquitetura** | ✅ Completa | Padrões SOLID e MVC implementados |
-| **Funcionalidades** | ✅ 90% | Core features funcionais |
-| **Interface** | ✅ Completa | Design system unificado |
-| **API Integration** | ✅ 95% | Endpoints principais conectados |
-| **Documentação** | ✅ Completa | Código e README atualizados |
-| **Testes** | 🔄 30% | Testes unitários em desenvolvimento |
-
-### 🎯 Próximos Marcos
-
-1. **Finalizar Sistema de Chamados** (2-3 semanas)
-2. **Implementar Testes Automatizados** (1-2 semanas)
-3. **Configurar Deploy/Distribuição** (1 semana)
-4. **Módulo de Relatórios** (3-4 semanas)
-
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto é propriedade da SUPTEC. Todos os direitos reservados.
-
-## 📞 Suporte
-
-Para suporte técnico ou dúvidas sobre o desenvolvimento, entre em contato com a equipe SUPTEC.
-
----
 
 **SUPTEC Desktop v1.1.0** - Sistema de Gerenciamento e Chamados Técnicos  
 *Desenvolvido com JavaFX 21 e Java 17 - Arquitetura Modular e API-First*

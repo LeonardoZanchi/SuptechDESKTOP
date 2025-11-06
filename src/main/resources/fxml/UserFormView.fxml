@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- ==================================================
+         USER FORM VIEW - Tela de Cadastro de Usuários
+         ==================================================
+         Formulário para criação de novos usuários (Gerente, Técnico, Usuário).
+
+         Responsabilidades:
+         - Coletar dados pessoais e profissionais
+         - Validar campos obrigatórios e formatos (nome, email, senha, telefone)
+         - Enviar solicitação de criação via UserRegistrationService
+
+         Controller: br.com.suptec.controllers.UserFormController
+         Elementos importantes (fx:id):
+         - cmbTipoUsuario : determina campos condicionais (setor/especialidade)
+         - txtNome, txtEmail, txtSenha, txtTelefone : campos principais
+         - handleSalvar / handleCancelar : handlers para ações
+
+         Observações:
+         - A validação usa ValidationUtils/FieldValidator e mensagens são exibidas
+             via AlertUtils.
+-->
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.com.suptec.controllers.UserFormController"
-            styleClass="user-edit-container"
-            stylesheets="@../css/main.css"
-            prefWidth="700"
-            prefHeight="750">
+                        xmlns:fx="http://javafx.com/fxml"
+                        fx:controller="br.com.suptec.controllers.UserFormController"
+                        styleClass="user-edit-container"
+                        stylesheets="@../css/main.css"
+                        prefWidth="700"
+                        prefHeight="750">
 
     <!-- Cabeçalho -->
     <top>

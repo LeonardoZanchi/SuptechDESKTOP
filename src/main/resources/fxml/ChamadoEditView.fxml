@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- ==================================================
+         CHAMADO EDIT VIEW - Tela de Edição de Chamados
+         ==================================================
+         Este FXML define a interface para editar um chamado existente.
+
+         Responsabilidade:
+         - Exibir campos do chamado (título, prioridade, status, descrição)
+         - Mostrar informações do usuário que abriu o chamado
+         - Permitir salvar ou cancelar alterações
+
+         Controller: br.com.suptec.controllers.ChamadoEditController
+         Elementos importantes (fx:id):
+         - txtTitulo, txtDescricao : campos de edição do chamado
+         - cmbPrioridade, cmbStatus : ComboBoxes para selecionar prioridade/status
+         - lblDataAbertura, lblNomeUsuario, lblEmailUsuario, lblSetorUsuario : Labels informativos
+         - Botões: handleSalvar (salva), handleCancelar (fecha sem salvar)
+
+         Observações:
+         - O layout usa um BorderPane com ScrollPane central para acomodar formulários
+             mais longos sem quebrar o layout.
+-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.com.suptec.controllers.ChamadoEditController"
-            styleClass="user-edit-container"
-            stylesheets="@../css/main.css"
-            prefWidth="800"
-            prefHeight="700">
+                        xmlns:fx="http://javafx.com/fxml"
+                        fx:controller="br.com.suptec.controllers.ChamadoEditController"
+                        styleClass="user-edit-container"
+                        stylesheets="@../css/main.css"
+                        prefWidth="800"
+                        prefHeight="700">
 
     <top>
         <VBox styleClass="header-container">

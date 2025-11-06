@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==================================================
+    CONFIG VIEW - Tela de Configurações
+    ==================================================
+    Define a interface de preferências da aplicação.
+
+    Responsabilidades:
+    - Seleção de tema (Claro / Escuro)
+    - Habilitar/desabilitar salvamento automático
+    - Seleção de idioma da interface
+    - Exibição de informações institucionais no rodapé (Sobre)
+
+    Controller: br.com.suptec.controllers.ConfigController
+    Elementos importantes (fx:id):
+    - rbClaro, rbEscuro : RadioButtons para tema
+    - chkAutoSave : CheckBox para salvar automaticamente
+    - comboIdioma : ComboBox para escolha de idioma
+    - onSave / onRestoreDefaults / onBack : handlers para ações do usuário
+
+    Observações:
+    - As preferências são persistidas via SettingsService (Properties no user.home)
+-->
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="br.com.suptec.controllers.ConfigController"
+          styleClass="page-container">
+
+    <!-- Top: botão voltar -->
+    <top>
+        <VBox styleClass="header-container">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+                <Button text="← Voltar" onAction="#onBack" styleClass="btn-back"/>
+                <VBox>
+                    <Label text="Configurações" styleClass="page-title"/>
+                    <Label text="Ajuste suas preferências" styleClass="page-subtitle"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <!-- Centralizar verticalmente as opções -->
+        <VBox spacing="24" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="60" bottom="20" left="60"/>
+            </padding>
+
+            <HBox spacing="40" alignment="CENTER">
+                <!-- Preferências visuais e de idioma -->
+                <VBox spacing="20" alignment="TOP_LEFT" prefWidth="520">
+                    <Label text="Preferências visuais" styleClass="config-page-title"/>
+
+                    <VBox spacing="10">
+                        <Label text="Tema do sistema:" styleClass="label-title"/>
+                        <HBox spacing="10">
+                            <RadioButton fx:id="rbClaro" text="Claro"/>
+                            <RadioButton fx:id="rbEscuro" text="Escuro"/>
+                        </HBox>
+                    </VBox>
+
+                    <Separator/>
+
+                    <VBox spacing="10">
+                        <Label text="Salvar dados automaticamente" styleClass="label-title"/>
+                        <CheckBox fx:id="chkAutoSave" text="Salvar alterações automaticamente"/>
+                    </VBox>
+
+                    <Separator/>
+
+                    <VBox spacing="10">
+                        <Label text="Idioma da interface" styleClass="label-title"/>
+                        <ComboBox fx:id="comboIdioma" prefWidth="200"/>
+                    </VBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Salvar" onAction="#onSave" styleClass="btn-primary"/>
+                        <Button text="Restaurar" onAction="#onRestoreDefaults"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Espaço vazio (opcional) para balancear o layout -->
+                <Region prefWidth="40"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- Footer: Sobre o sistema -->
+    <bottom>
+        <VBox alignment="CENTER" spacing="6">
+            <padding>
+                <Insets top="10" right="20" bottom="20" left="20"/>
+            </padding>
+            <VBox spacing="6" style="-fx-padding:12; -fx-border-color: #e6e6e6; -fx-border-radius:8; -fx-background-radius:8; -fx-background-color: rgba(240,240,240,0.3);" alignment="CENTER">
+                <Label text="SUPTECH - Sistema de Suporte Técnico Inteligente" wrapText="true" styleClass="label-strong"/>
+                <Label text="Versão: 1.0.0"/>
+                <Label text="Desenvolvido por: Equipe SUPTECH"/>
+                <Label text="Ano: 2025"/>
+                <Label text="Contato: suporte@suptech.com"/>
+                <Label text="Uma solução leve e profissional para apoiar seu time de suporte." wrapText="true"/>
+            </VBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>
