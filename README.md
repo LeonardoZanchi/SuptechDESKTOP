@@ -1,10 +1,30 @@
 # SUPTEC Desktop - Sistema de Chamados Técnicos
 
-Aplicativo desktop JavaFX para gerenciamento completo de chamados e usuários do sistema SUPTEC, com arquitetura modular e interface moderna.
+Aplicativo desktop JavaFX para gerenciamento completo de chamados e usuários do sistema SUPTEC, com arquitetura modular, interface moderna e sistema de configuração flexível.
+
+## 📋 Índice
+
+- [Visão Geral](#visão-geral)
+- [Funcionalidades](#funcionalidades-implementadas)
+- [Tecnologias](#tecnologias-utilizadas)
+- [Configuração da API](#configuração-da-api)
+- [Como Executar](#como-executar)
+- [Estrutura do Projeto](#estrutura-completa-do-projeto)
+- [Arquitetura](#arquitetura-da-aplicação)
+- [Status do Projeto](#status-do-projeto-v12)
+
+---
 
 ## Visão Geral
 
-O SUPTEC Desktop é uma aplicação desktop completa desenvolvida em JavaFX que oferece uma interface gráfica moderna e intuitiva para técnicos e administradores gerenciarem chamados técnicos. O sistema implementa autenticação segura via API REST, navegação modular por cards interativos, e está preparado para expansão com novos módulos funcionais.
+O SUPTEC Desktop é uma aplicação desktop completa desenvolvida em JavaFX que oferece uma interface gráfica moderna e intuitiva para técnicos e administradores gerenciarem chamados técnicos. O sistema implementa autenticação segura via API REST, navegação modular por cards interativos, e possui configuração flexível para diferentes ambientes de desenvolvimento e produção.
+
+### 🎯 Destaques da Versão 1.2
+
+- ✅ **Sistema de Configuração Centralizado**: URL da API totalmente configurável via arquivo `.properties`
+- ✅ **Correção de Endpoints de Exclusão**: Padronização de todos os endpoints DELETE
+- ✅ **Documentação Completa**: Guia detalhado de configuração e troubleshooting
+- ✅ **Suporte Multi-Ambiente**: Fácil alternância entre localhost, rede local e produção
 
 ## Funcionalidades Implementadas
 
@@ -59,7 +79,8 @@ O SUPTEC Desktop é uma aplicação desktop completa desenvolvida em JavaFX que 
 - **Gson 2.10.1** - Serialização/Deserialização JSON
 - **HttpClient (java.net.http)** - Cliente HTTP nativo do Java 11+
 - **Preferences API** - Persistência local de configurações
-- **Padrões de Projeto**: MVC (Model-View-Controller), Component Pattern
+- **Properties API** - Sistema de configuração via arquivos `.properties`
+- **Padrões de Projeto**: MVC (Model-View-Controller), Component Pattern, Singleton
 
 ## Estrutura Completa do Projeto
 
@@ -110,8 +131,11 @@ suptec-desktop/
 │       │       ├── AlertUtils.java                   # Utilitários para alertas e diálogos
 │       │       ├── JsonUtils.java                    # Utilitários para manipulação JSON
 │       │       ├── FieldValidator.java               # Validadores de campos de formulário
+│       │       ├── ConfigLoader.java                 # 🆕 Carregador de configurações (Singleton)
 │       │       └── SettingsService.java              # Persistência local de preferências (Properties)
 │       └── resources/
+│           ├── application.properties                # 🆕 Configuração da API (não commitado)
+│           ├── application.properties.example        # 🆕 Exemplo de configuração
 │           ├── css/                          # Sistema de estilos CSS modular
 │           │   ├── main.css                  # Arquivo principal que importa todos
 │           │   ├── colors.css                # Paleta de cores e variáveis
@@ -156,7 +180,19 @@ suptec-desktop/
 
 - **Java 17** ou superior instalado
 - **Maven 3.6+** instalado
-- **API SUPTEC** rodando
+- **API SUPTEC** rodando (configure a URL em `application.properties`)
+
+### Configuração Inicial
+
+1. **Clone/baixe o projeto**
+2. **Configure a URL da API**:
+   ```bash
+   # Copie o arquivo de exemplo
+   cp src/main/resources/application.properties.example src/main/resources/application.properties
+   
+   # Edite e configure sua URL
+   # api.base.url=http://SEU_IP:PORTA/api/
+   ```
 
 ### Instalação e Execução
 
@@ -197,24 +233,83 @@ mvn clean
 
 ## Configuração da API
 
-### Modo Atual (Produção Integrada)
-- **API REST**: `http://localhost:5165/api/`
-- **Endpoints Implementados**:
-  - `GET /api/Usuario/Listar` - Listagem de usuários
-  - `GET /api/Gerente/Listar` - Listagem de gerentes
-  - `GET /api/Tecnico/Listar` - Listagem de técnicos
-  - `DELETE /api/Usuario/Excluir/{id}` - Exclusão de usuários
-  - `DELETE /api/Gerente/Excluir/{id}` - Exclusão de gerentes
-  - `DELETE /api/Tecnico/Excluir/{id}` - Exclusão de técnicos
-- **Autenticação**: Implementada com validação de sessão
-- **Logs**: Sistema completo de debug e monitoramento
+### 🔧 Sistema de Configuração (v1.2)
 
-### Configuração de Desenvolvimento
-- **Host**: localhost
-- **Porta**: 5165
-- **Protocolo**: HTTP (desenvolvimento)
-- **Headers**: Content-Type: application/json
-- **Timeout**: 30 segundos
+A partir da versão 1.2, a URL da API é **totalmente configurável** via arquivo `application.properties`, facilitando a mudança entre diferentes ambientes sem necessidade de recompilar o código.
+
+#### 📍 Arquivo de Configuração
+
+**Localização**: `src/main/resources/application.properties`
+
+```properties
+# URL base da API (inclua o /api/ no final)
+api.base.url=http://localhost:5000/api/
+
+# Timeout de conexão em segundos
+api.timeout=30
+```
+
+#### 🚀 Exemplos de Configuração
+
+**Desenvolvimento Local:**
+```properties
+api.base.url=http://localhost:5000/api/
+```
+
+**Rede Local:**
+```properties
+api.base.url=http://192.168.1.100:5000/api/
+```
+
+**Servidor de Produção:**
+```properties
+api.base.url=https://api.suptec.com.br/api/
+```
+
+#### ⚙️ Como Alterar a URL da API
+
+1. Abra `src/main/resources/application.properties`
+2. Altere o valor de `api.base.url` para a URL desejada
+3. **IMPORTANTE**: Sempre inclua `/api/` no final da URL
+4. Salve e execute novamente (ou recompile)
+
+**Verificação**: Ao iniciar, você verá no console:
+```
+🔧 ApiService inicializado com URL: http://localhost:5000/api/
+Configurações carregadas com sucesso!
+```
+
+> 📖 Para mais detalhes, consulte [CONFIG_API.md](CONFIG_API.md)
+
+### 🔗 Endpoints da API
+
+#### Autenticação
+- `POST /AuthDesktop/LoginDesktop` - Login de usuário
+
+#### Usuários
+- `GET /Usuario/ListarUsuarios` - Listar todos os usuários
+- `POST /Usuario/Cadastrar` - Criar novo usuário
+- `PUT /Usuario/Editar/{id}` - Editar usuário existente
+- `DELETE /Usuario/Excluir/{id}` - Excluir usuário ✅
+
+#### Técnicos
+- `GET /Tecnico/ListarTecnicos` - Listar todos os técnicos
+- `POST /Tecnico/Cadastrar` - Criar novo técnico
+- `PUT /Tecnico/Editar/{id}` - Editar técnico existente
+- `DELETE /Tecnico/Excluir/{id}` - Excluir técnico ✅
+
+#### Gerentes
+- `GET /Gerente/ListarGerentes` - Listar todos os gerentes
+- `POST /Gerente/Cadastrar` - Criar novo gerente
+- `PUT /Gerente/Editar/{id}` - Editar gerente existente
+- `DELETE /Gerente/Excluir/{id}` - Excluir gerente ✅
+
+#### Chamados
+- `GET /Chamado/ListarChamados` - Listar todos os chamados
+- `PUT /Chamado/Editar/{id}` - Editar chamado existente
+- `DELETE /Chamado/Excluir/{id}` - Excluir chamado
+
+> ⚠️ **Nota**: Todos os endpoints de exclusão foram padronizados para usar o formato `/{id}` no caminho da URL (correção v1.2)
 
 ## Sistema de Estilos CSS
 
@@ -333,7 +428,28 @@ Implementação técnica relevante:
 - Navegação: foi adicionada a função `SceneManager.replaceRootPreserveStage(...)` para preservar o tamanho da janela ao trocar de telas (substitui apenas o root da Scene existente).
 
 
-## Status do Projeto (v1.1)
+## Status do Projeto (v1.2)
+
+### 📦 Versão Atual: 1.2.0 (23/11/2025)
+
+#### ✅ Novidades da v1.2
+
+##### Sistema de Configuração Centralizado
+- **ConfigLoader**: Classe Singleton para carregar configurações automaticamente
+- **application.properties**: Arquivo de configuração para URL da API e timeout
+- **application.properties.example**: Arquivo exemplo para novos desenvolvedores
+- **Documentação**: Guia completo em [CONFIG_API.md](CONFIG_API.md)
+
+##### Correções Críticas
+- **Endpoints de Exclusão**: Padronizados todos os endpoints DELETE
+  - ❌ Antes: `Usuario/Excluir?id={id}` (formato incorreto)
+  - ✅ Agora: `Usuario/Excluir/{id}` (formato correto)
+  - Aplicado para: Usuário, Técnico e Gerente
+
+##### Melhorias de Segurança
+- **Arquivo .gitignore atualizado**: `application.properties` não será mais commitado
+- **Remoção de dados sensíveis**: IPs específicos removidos da documentação
+- **Configuração por ambiente**: Cada desenvolvedor mantém sua própria configuração
 
 ### Módulos Completos e Funcionais
 
@@ -360,5 +476,23 @@ Implementação técnica relevante:
 - **Responsividade**: Layouts adaptativos para diferentes resoluções
 
 
-**SUPTEC Desktop v1.1.0** - Sistema de Gerenciamento e Chamados Técnicos  
+**SUPTEC Desktop v1.2.0** - Sistema de Gerenciamento e Chamados Técnicos  
 *Desenvolvido com JavaFX 21 e Java 17 - Arquitetura Modular e API-First*
+
+---
+
+## 📚 Documentação Adicional
+
+- [CONFIG_API.md](CONFIG_API.md) - Guia completo de configuração da API
+- [Histórico de Alterações](CONFIG_API.md#histórico-de-alterações) - Changelog detalhado
+
+## 🤝 Contribuindo
+
+1. Configure seu ambiente seguindo as instruções acima
+2. Copie `application.properties.example` para `application.properties`
+3. Configure sua URL local da API
+4. Nunca commite o arquivo `application.properties` (já está no `.gitignore`)
+
+## 📝 Licença
+
+Copyright © 2025 SUPTEC. Todos os direitos reservados.
