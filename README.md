@@ -258,7 +258,7 @@ api.base.url=http://localhost:5000/api/
 
 **Rede Local:**
 ```properties
-api.base.url=http://192.168.1.100:5000/api/
+api.base.url=http://seuip:5000/api/
 ```
 
 **Servidor de Produção:**
