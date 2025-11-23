@@ -100,6 +100,14 @@
                     <TextArea fx:id="txtDescricao" promptText="Descreva o problema ou solicitação" styleClass="form-input" prefRowCount="6" wrapText="true"/>
                 </VBox>
 
+                <Separator styleClass="form-separator"/>
+
+                <VBox spacing="12" styleClass="form-section">
+                    <Label text="RESPOSTA DO TÉCNICO" styleClass="section-title"/>
+                    <TextArea fx:id="txtRespostaDoTecnico" promptText="Resposta do técnico" styleClass="form-input" prefRowCount="4" wrapText="true" editable="true"/>
+                    <Label text="Este campo pode ser editado para adicionar ou atualizar a resposta do técnico." styleClass="hint-text"/>
+                </VBox>
+
                 <HBox alignment="CENTER_LEFT" spacing="8" styleClass="required-note">
                     <padding>
                         <Insets top="8"/>

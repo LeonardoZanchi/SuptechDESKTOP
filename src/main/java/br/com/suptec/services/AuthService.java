@@ -44,60 +44,91 @@ public class AuthService {
             String jsonRequest = JsonUtils.toJson(loginRequest);
             
             if (jsonRequest == null) {
-                System.err.println("Erro ao serializar requisição de login");
+                System.err.println("❌ ERRO: Falha ao serializar requisição de login");
                 return false;
             }
 
-            System.out.println("🔐 Validando login de gerente para acesso desktop...");
-            System.out.println("Enviando requisição: " + jsonRequest);
+            System.out.println("\n========================================");
+            System.out.println("🔐 INICIANDO LOGIN DE GERENTE");
+            System.out.println("========================================");
+            System.out.println("📧 Email: " + email);
+            System.out.println("📝 JSON Request: " + jsonRequest);
+            System.out.println("🌐 Endpoint: AuthDesktop/LoginDesktop");
 
             // Fazer chamada para API específica de desktop (só gerentes)
-            // Codificar o espaço na URL como %20
             ApiResponse response = apiService.post("AuthDesktop/LoginDesktop", jsonRequest);
             
-            System.out.println("Status da resposta: " + response.getStatusCode());
-            System.out.println("Corpo da resposta: " + response.getBody());
+            System.out.println("\n📡 RESPOSTA DA API:");
+            System.out.println("Status Code: " + response.getStatusCode());
+            System.out.println("Body: " + (response.getBody() != null ? response.getBody() : "null"));
+            System.out.println("========================================\n");
             
+            // Verificar erro de conexão
             if (response.getStatusCode() == -1) {
-                System.err.println("✗ Erro de conexão com a API");
+                System.err.println("❌ ERRO DE CONEXÃO: Não foi possível conectar à API");
+                System.err.println("   Verifique se a API está rodando em http://localhost:5165");
                 return false;
             }
 
+            // Verificar se foi bem-sucedido
             if (!response.isSuccess()) {
-                System.err.println("✗ Login falhou. Status: " + response.getStatusCode());
+                System.err.println("❌ LOGIN FALHOU - Status: " + response.getStatusCode());
+                
                 if (response.getStatusCode() == 401) {
-                    System.err.println("✗ Acesso negado: Usuário não é gerente ou credenciais inválidas");
+                    System.err.println("   Motivo: Credenciais inválidas ou usuário não é gerente");
                 } else if (response.getStatusCode() == 404) {
-                    System.err.println("✗ Usuário não encontrado como gerente");
+                    System.err.println("   Motivo: Endpoint não encontrado ou usuário não cadastrado como gerente");
+                } else if (response.getStatusCode() == 400) {
+                    System.err.println("   Motivo: Requisição inválida - verifique formato dos dados");
+                } else if (response.getStatusCode() == 500) {
+                    System.err.println("   Motivo: Erro interno no servidor da API");
                 }
-                if (response.getBody() != null) {
-                    System.err.println("Resposta da API: " + response.getBody());
+                
+                if (response.getBody() != null && !response.getBody().isEmpty()) {
+                    System.err.println("   Resposta da API: " + response.getBody());
                 }
                 return false;
             }
 
             // Processar resposta
-            if (response.getBody() != null && !response.getBody().trim().isEmpty()) {
-                LoginResponse loginResponse = JsonUtils.fromJson(response.getBody(), LoginResponse.class);
-                
-                if (loginResponse != null && loginResponse.isSuccess()) {
-                    this.tokenAtual = loginResponse.getToken();
-                    this.emailUsuarioLogado = email;
-                    this.nomeUsuarioLogado = extrairNomeDoToken(loginResponse.getToken());
-                    
-                    System.out.println("✓ Login de gerente realizado com sucesso!");
-                    System.out.println("✓ Token recebido para usuário: " + this.nomeUsuarioLogado);
-                    System.out.println("✓ Acesso desktop autorizado");
-                    
-                    return true;
-                }
+            if (response.getBody() == null || response.getBody().trim().isEmpty()) {
+                System.err.println("❌ ERRO: Resposta da API está vazia");
+                return false;
             }
 
-            System.err.println("✗ Resposta da API não contém token válido para gerente");
-            return false;
+            System.out.println("🔍 Parseando resposta JSON...");
+            LoginResponse loginResponse = JsonUtils.fromJson(response.getBody(), LoginResponse.class);
+            
+            if (loginResponse == null) {
+                System.err.println("❌ ERRO: Falha ao parsear resposta JSON");
+                System.err.println("   JSON recebido: " + response.getBody());
+                return false;
+            }
+            
+            if (!loginResponse.isSuccess()) {
+                System.err.println("❌ ERRO: Token não encontrado na resposta");
+                System.err.println("   LoginResponse.token = " + loginResponse.getToken());
+                return false;
+            }
+
+            // Login bem-sucedido!
+            this.tokenAtual = loginResponse.getToken();
+            this.emailUsuarioLogado = email;
+            this.nomeUsuarioLogado = extrairNomeDoToken(loginResponse.getToken());
+            
+            System.out.println("✅ LOGIN REALIZADO COM SUCESSO!");
+            System.out.println("✅ Usuário: " + this.nomeUsuarioLogado);
+            System.out.println("✅ Token: " + this.tokenAtual.substring(0, Math.min(30, this.tokenAtual.length())) + "...");
+            System.out.println("✅ Acesso desktop autorizado");
+            System.out.println("========================================\n");
+            
+            return true;
 
         } catch (Exception e) {
-            System.err.println("✗ Erro durante validação de login: " + e.getMessage());
+            System.err.println("❌ EXCEÇÃO DURANTE LOGIN:");
+            System.err.println("   Mensagem: " + e.getMessage());
+            System.err.println("   Classe: " + e.getClass().getName());
+            e.printStackTrace();
             return false;
         }
     }

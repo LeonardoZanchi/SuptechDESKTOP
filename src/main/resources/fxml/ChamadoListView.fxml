@@ -133,6 +133,11 @@
                                     text="Data" 
                                     sortable="true"
                                     prefWidth="80"/>
+                        
+                        <TableColumn fx:id="colRespostaDoTecnico" 
+                                    text="Resposta do Técnico" 
+                                    sortable="true"
+                                    prefWidth="200"/>
                     </columns>
                     
                     <!-- Mensagem quando não há dados -->

@@ -38,6 +38,9 @@ public class ChamadoActionHandler {
         
         detalhes.append("DESCRICAO\n\n");
         detalhes.append(chamado.getDescricao() != null ? chamado.getDescricao() : "Sem descricao");
+        
+        detalhes.append("\n\nRESPOSTA DO TECNICO\n\n");
+        detalhes.append(chamado.getRespostaDoTecnicoFormatada());
 
         AlertUtils.showInfo("Detalhes do Chamado", detalhes.toString());
     }

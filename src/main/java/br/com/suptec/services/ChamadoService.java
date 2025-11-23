@@ -39,9 +39,25 @@ public class ChamadoService {
         ObservableList<Chamado> chamados = FXCollections.observableArrayList();
 
         try {
-            ApiResponse response = apiService.get("Chamado/Listar");
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("Erro: Token de autenticação não encontrado. Faça login novamente.");
+                return chamados;
+            }
+
+            System.out.println("Buscando chamados...");
+            System.out.println("Endpoint: Chamado/ListarChamados");
+            System.out.println("Token presente: " + (token.length() > 20 ? "Sim" : "Token muito curto"));
+
+            ApiResponse response = apiService.getWithAuth("Chamado/ListarChamados", token);
+            
+            System.out.println("📥 Status recebido: " + response.getStatusCode());
             
             if (response.getStatusCode() == 200 && response.getBody() != null) {
+                System.out.println("📦 Resposta completa da API:");
+                System.out.println(response.getBody());
+                System.out.println("=====================================");
                 JsonArray jsonArray = JsonParser.parseString(response.getBody()).getAsJsonArray();
                 
                 for (JsonElement element : jsonArray) {
@@ -55,6 +71,12 @@ public class ChamadoService {
                 System.out.println("Carregados " + chamados.size() + " chamados com sucesso");
             } else {
                 System.err.println("Erro ao buscar chamados. Status: " + response.getStatusCode());
+                System.err.println("Corpo da resposta: " + response.getBody());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("Token inválido ou expirado. Faça login novamente.");
+                } else if (response.getStatusCode() == 500) {
+                    System.err.println("Erro no servidor. Verifique se a API está funcionando corretamente.");
+                }
             }
         } catch (Exception e) {
             System.err.println("Erro ao buscar chamados da API: " + e.getMessage());
@@ -126,14 +148,24 @@ public class ChamadoService {
         }
 
         try {
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             String endpoint = "Chamado/Excluir/" + chamado.getChamadoID();
-            ApiResponse response = apiService.delete(endpoint);
+            ApiResponse response = apiService.deleteWithAuth(endpoint, token);
             
             if (response.getStatusCode() == 200) {
                 System.out.println("Chamado ID " + chamado.getChamadoID() + " excluído com sucesso");
                 return true;
             } else {
                 System.err.println("Erro ao excluir chamado. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("✗ Token inválido ou expirado. Faça login novamente.");
+                }
                 return false;
             }
         } catch (Exception e) {
@@ -152,16 +184,26 @@ public class ChamadoService {
         }
 
         try {
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             String endpoint = "Chamado/Editar/" + chamado.getChamadoID();
             String jsonBody = buildChamadoJson(chamado);
             
-            ApiResponse response = apiService.put(endpoint, jsonBody);
+            ApiResponse response = apiService.putWithAuth(endpoint, jsonBody, token);
             
             if (response.getStatusCode() == 200) {
                 System.out.println("Chamado ID " + chamado.getChamadoID() + " atualizado com sucesso");
                 return true;
             } else {
                 System.err.println("Erro ao atualizar chamado. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("✗ Token inválido ou expirado. Faça login novamente.");
+                }
                 return false;
             }
         } catch (Exception e) {
@@ -199,6 +241,14 @@ public class ChamadoService {
             if (obj.has("status") && !obj.get("status").isJsonNull()) {
                 chamado.setStatus(obj.get("status").getAsString());
             }
+            // Campo resposta do técnico (campo da API: respostaTecnico)
+            if (obj.has("respostaTecnico") && !obj.get("respostaTecnico").isJsonNull()) {
+                String resposta = obj.get("respostaTecnico").getAsString();
+                System.out.println("DEBUG - Resposta do Técnico encontrada: " + resposta);
+                chamado.setRespostaDoTecnico(resposta);
+            } else {
+                System.out.println("DEBUG - Resposta do Técnico não encontrada ou null no JSON");
+            }
             if (obj.has("dataAbertura") && !obj.get("dataAbertura").isJsonNull()) {
                 String dataStr = obj.get("dataAbertura").getAsString();
                 chamado.setDataAbertura(LocalDateTime.parse(dataStr));
@@ -222,6 +272,10 @@ public class ChamadoService {
         json.addProperty("prioridade", chamado.getPrioridade());
         if (chamado.getStatus() != null) {
             json.addProperty("status", chamado.getStatus());
+        }
+        // Adicionar resposta do técnico se houver (campo da API: respostaTecnico)
+        if (chamado.getRespostaDoTecnico() != null) {
+            json.addProperty("respostaTecnico", chamado.getRespostaDoTecnico());
         }
         
         return json.toString();

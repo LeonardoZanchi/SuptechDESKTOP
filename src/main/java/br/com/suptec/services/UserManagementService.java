@@ -60,7 +60,14 @@ public class UserManagementService {
         List<Usuario> gerentes = new ArrayList<>();
         
         try {
-            ApiResponse response = apiService.get("Gerente/Listar");
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("Erro: Token de autenticação não encontrado para listar gerentes.");
+                return gerentes;
+            }
+
+            ApiResponse response = apiService.getWithAuth("Gerente/ListarGerentesDesktop", token);
             if (response.getStatusCode() == 200 && response.getBody() != null) {
                 GerenteResponse[] gerentesResponse = JsonUtils.fromJson(response.getBody(), GerenteResponse[].class);
                 if (gerentesResponse != null) {
@@ -70,6 +77,9 @@ public class UserManagementService {
                 }
             } else {
                 System.err.println("Erro ao buscar gerentes. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("Token inválido ou expirado. Faça login novamente.");
+                }
             }
         } catch (Exception e) {
             System.err.println("Erro ao listar gerentes: " + e.getMessage());
@@ -85,7 +95,14 @@ public class UserManagementService {
         List<Usuario> tecnicos = new ArrayList<>();
         
         try {
-            ApiResponse response = apiService.get("Tecnico/Listar");
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("Erro: Token de autenticação não encontrado para listar técnicos.");
+                return tecnicos;
+            }
+
+            ApiResponse response = apiService.getWithAuth("Tecnico/ListarTecnicosDesktop", token);
             if (response.getStatusCode() == 200 && response.getBody() != null) {
                 TecnicoResponse[] tecnicosResponse = JsonUtils.fromJson(response.getBody(), TecnicoResponse[].class);
                 if (tecnicosResponse != null) {
@@ -95,6 +112,9 @@ public class UserManagementService {
                 }
             } else {
                 System.err.println("Erro ao buscar técnicos. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("Token inválido ou expirado. Faça login novamente.");
+                }
             }
         } catch (Exception e) {
             System.err.println("Erro ao listar técnicos: " + e.getMessage());
@@ -110,7 +130,14 @@ public class UserManagementService {
         List<Usuario> usuariosComuns = new ArrayList<>();
         
         try {
-            ApiResponse response = apiService.get("Usuario/Listar");
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("Erro: Token de autenticação não encontrado para listar usuários.");
+                return usuariosComuns;
+            }
+
+            ApiResponse response = apiService.getWithAuth("Usuario/ListarUsuariosDesktop", token);
             if (response.getStatusCode() == 200 && response.getBody() != null) {
                 UsuarioResponse[] usuariosResponse = JsonUtils.fromJson(response.getBody(), UsuarioResponse[].class);
                 if (usuariosResponse != null) {
@@ -120,6 +147,9 @@ public class UserManagementService {
                 }
             } else {
                 System.err.println("Erro ao buscar usuários. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("Token inválido ou expirado. Faça login novamente.");
+                }
             }
         } catch (Exception e) {
             System.err.println("Erro ao listar usuários comuns: " + e.getMessage());
@@ -232,15 +262,24 @@ public class UserManagementService {
         }
 
         try {
+            // Obter token de autenticação
+            String token = authService.getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             // Determinar endpoint baseado no tipo 
             String endpoint = obterEndpointExclusao(usuario.getTipo());
-            // Formato correto: endpoint + "/" + ID (conforme especificado pela API)
+            
+            // Montar URL - Todos usam formato /Excluir/{id}
             String url = endpoint + "/" + usuario.getId();
             
             System.out.println("🔗 Endpoint de exclusão: " + url);
-            System.out.println("👤 Excluindo usuário: " + usuario.getNome() + " (ID: " + usuario.getId() + ")");
+            System.out.println("👤 Excluindo usuário: " + usuario.getNome() + " (Tipo: " + usuario.getTipo() + ", ID: " + usuario.getId() + ")");
+            System.out.println("🔑 Token: " + (token != null ? "OK" : "NULO"));
             
-            ApiResponse response = apiService.delete(url);
+            ApiResponse response = apiService.deleteWithAuth(url, token);
             
             if (response.isSuccess()) {
                 System.out.println("✅ Usuário excluído com sucesso da API");
@@ -248,6 +287,15 @@ public class UserManagementService {
             } else {
                 System.err.println("✗ Falha ao excluir usuário");
                 System.err.println("  → Status HTTP: " + response.getStatusCode());
+                System.err.println("  → URL usada: " + url);
+                System.err.println("  → Tipo de usuário: " + usuario.getTipo());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("  → Token inválido ou expirado. Faça login novamente.");
+                } else if (response.getStatusCode() == 403) {
+                    System.err.println("  → Acesso negado. Verifique permissões e formato do endpoint.");
+                } else if (response.getStatusCode() == 404) {
+                    System.err.println("  → Usuário não encontrado ou endpoint incorreto.");
+                }
                 if (response.getBody() != null) {
                     System.err.println("  → Resposta da API: " + response.getBody());
                 }
@@ -288,6 +336,14 @@ public class UserManagementService {
         }
 
         try {
+            // Obter token de autenticação
+            AuthService authService = AuthService.getInstance();
+            String token = authService.getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             // Determinar endpoint baseado no tipo (com ID na URL)
             String endpoint = obterEndpointAtualizacao(usuario.getTipo(), usuario.getId());
             
@@ -301,9 +357,11 @@ public class UserManagementService {
 
             System.out.println("🔄 Atualizando usuário via API...");
             System.out.println("  → Endpoint: " + endpoint);
+            System.out.println("  → Tipo: " + usuario.getTipo());
             System.out.println("  → JSON: " + jsonBody);
+            System.out.println("  → Token: " + (token != null ? "OK" : "NULO"));
 
-            ApiResponse response = apiService.put(endpoint, jsonBody);
+            ApiResponse response = apiService.putWithAuth(endpoint, jsonBody, token);
             
             if (response.isSuccess()) {
                 System.out.println("✓ Usuário atualizado com sucesso!");
@@ -311,6 +369,16 @@ public class UserManagementService {
             } else {
                 System.err.println("✗ Falha ao atualizar usuário");
                 System.err.println("  → Status HTTP: " + response.getStatusCode());
+                System.err.println("  → Tipo de usuário: " + usuario.getTipo());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("  → Token inválido ou expirado. Faça login novamente.");
+                } else if (response.getStatusCode() == 403) {
+                    System.err.println("  → Acesso negado. Verifique permissões.");
+                } else if (response.getStatusCode() == 404) {
+                    System.err.println("  → Usuário não encontrado ou endpoint incorreto.");
+                } else if (response.getStatusCode() == 400) {
+                    System.err.println("  → Dados inválidos. Verifique o JSON enviado.");
+                }
                 if (response.getBody() != null) {
                     System.err.println("  → Resposta da API: " + response.getBody());
                 }
@@ -325,7 +393,7 @@ public class UserManagementService {
 
     /**
      * Retorna o endpoint correto de atualização baseado no tipo de usuário
-     * Formato: Tipo/Editar/ID
+     * Formato: Tipo/Editar/ID (ID na URL)
      */
     private String obterEndpointAtualizacao(TipoUsuario tipo, String id) {
         switch (tipo) {

@@ -16,6 +16,7 @@ public class Chamado {
     private String descricao;
     private String prioridade; // "Baixa", "Media", "Alta"
     private String status; // novo campo: ex: "ABERTO", "FECHADO", etc.
+    private String respostaDoTecnico; // Resposta do técnico ao chamado
     private LocalDateTime dataAbertura;
 
     // Enum para prioridades
@@ -45,7 +46,7 @@ public class Chamado {
 
     public Chamado(String chamadoID, String nomeDoUsuario, String emailDoUsuario, 
                    String setorDoUsuario, String titulo, String descricao, 
-                   String prioridade, String status, LocalDateTime dataAbertura) {
+                   String prioridade, String status, String respostaDoTecnico, LocalDateTime dataAbertura) {
         this.chamadoID = chamadoID;
         this.nomeDoUsuario = nomeDoUsuario;
         this.emailDoUsuario = emailDoUsuario;
@@ -54,6 +55,7 @@ public class Chamado {
         this.descricao = descricao;
         this.prioridade = prioridade;
         this.status = status;
+        this.respostaDoTecnico = respostaDoTecnico;
         this.dataAbertura = dataAbertura;
     }
 
@@ -82,6 +84,9 @@ public class Chamado {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
+    public String getRespostaDoTecnico() { return respostaDoTecnico; }
+    public void setRespostaDoTecnico(String respostaDoTecnico) { this.respostaDoTecnico = respostaDoTecnico; }
+
     public LocalDateTime getDataAbertura() { return dataAbertura; }
     public void setDataAbertura(LocalDateTime dataAbertura) { this.dataAbertura = dataAbertura; }
 
@@ -98,5 +103,9 @@ public class Chamado {
 
     public String getSetorFormatado() {
         return (setorDoUsuario != null && !setorDoUsuario.trim().isEmpty()) ? setorDoUsuario : "N/A";
+    }
+
+    public String getRespostaDoTecnicoFormatada() {
+        return (respostaDoTecnico != null && !respostaDoTecnico.trim().isEmpty()) ? respostaDoTecnico : "Sem resposta";
     }
 }

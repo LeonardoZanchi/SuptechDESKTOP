@@ -41,6 +41,13 @@ public class UserRegistrationService {
      */
     public boolean adicionarGerente(String nome, String email, String senha, String telefone, String setor) {
         try {
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             GerenteRequest request = new GerenteRequest(nome, email, senha, telefone, setor);
             String jsonRequest = JsonUtils.toJson(request);
             
@@ -50,13 +57,16 @@ public class UserRegistrationService {
             }
 
             System.out.println("Cadastrando gerente: " + nome);
-            ApiResponse response = apiService.post("Gerente/Adicionar", jsonRequest);
+            ApiResponse response = apiService.postWithAuth("Gerente/Adicionar", jsonRequest, token);
             
             if (response.getStatusCode() == 200 || response.getStatusCode() == 201) {
                 System.out.println("✓ Gerente cadastrado com sucesso!");
                 return true;
             } else {
                 System.err.println("✗ Erro ao cadastrar gerente. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("✗ Token inválido ou expirado. Faça login novamente.");
+                }
                 if (response.getBody() != null) {
                     System.err.println("Detalhes: " + response.getBody());
                 }
@@ -79,6 +89,13 @@ public class UserRegistrationService {
      */
     public boolean adicionarTecnico(String nome, String email, String senha, String telefone, String especialidade) {
         try {
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             TecnicoRequest request = new TecnicoRequest(nome, email, senha, telefone, especialidade);
             String jsonRequest = JsonUtils.toJson(request);
             
@@ -88,13 +105,16 @@ public class UserRegistrationService {
             }
 
             System.out.println("Cadastrando técnico: " + nome);
-            ApiResponse response = apiService.post("Tecnico/Adicionar", jsonRequest);
+            ApiResponse response = apiService.postWithAuth("Tecnico/Adicionar", jsonRequest, token);
             
             if (response.getStatusCode() == 200 || response.getStatusCode() == 201) {
                 System.out.println("✓ Técnico cadastrado com sucesso!");
                 return true;
             } else {
                 System.err.println("✗ Erro ao cadastrar técnico. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("✗ Token inválido ou expirado. Faça login novamente.");
+                }
                 if (response.getBody() != null) {
                     System.err.println("Detalhes: " + response.getBody());
                 }
@@ -117,6 +137,13 @@ public class UserRegistrationService {
      */
     public boolean adicionarUsuario(String nome, String email, String senha, String telefone, String setor) {
         try {
+            // Obter token de autenticação
+            String token = AuthService.getInstance().getTokenAtual();
+            if (token == null || token.isEmpty()) {
+                System.err.println("✗ Token de autenticação não encontrado. Faça login novamente.");
+                return false;
+            }
+
             UsuarioRequest request = new UsuarioRequest(nome, email, senha, telefone, setor);
             String jsonRequest = JsonUtils.toJson(request);
             
@@ -126,13 +153,16 @@ public class UserRegistrationService {
             }
 
             System.out.println("Cadastrando usuário: " + nome);
-            ApiResponse response = apiService.post("Usuario/Adicionar", jsonRequest);
+            ApiResponse response = apiService.postWithAuth("Usuario/Adicionar", jsonRequest, token);
             
             if (response.getStatusCode() == 200 || response.getStatusCode() == 201) {
                 System.out.println("✓ Usuário cadastrado com sucesso!");
                 return true;
             } else {
                 System.err.println("✗ Erro ao cadastrar usuário. Status: " + response.getStatusCode());
+                if (response.getStatusCode() == 401) {
+                    System.err.println("✗ Token inválido ou expirado. Faça login novamente.");
+                }
                 if (response.getBody() != null) {
                     System.err.println("Detalhes: " + response.getBody());
                 }

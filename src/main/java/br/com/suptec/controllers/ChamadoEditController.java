@@ -27,6 +27,7 @@ public class ChamadoEditController {
     @FXML private Label lblSetorUsuario;
 
     @FXML private TextArea txtDescricao;
+    @FXML private TextArea txtRespostaDoTecnico;
 
     private Chamado chamadoOriginal;
     private Runnable onSaveCallback;
@@ -78,6 +79,14 @@ public class ChamadoEditController {
         lblNomeUsuario.setText(chamadoOriginal.getNomeDoUsuario());
         lblEmailUsuario.setText(chamadoOriginal.getEmailFormatado());
         lblSetorUsuario.setText(chamadoOriginal.getSetorFormatado());
+        
+        // Resposta do técnico (pode ser null)
+        if (chamadoOriginal.getRespostaDoTecnico() != null && !chamadoOriginal.getRespostaDoTecnico().trim().isEmpty()) {
+            txtRespostaDoTecnico.setText(chamadoOriginal.getRespostaDoTecnico());
+        } else {
+            txtRespostaDoTecnico.setText("Sem resposta do técnico ainda.");
+            txtRespostaDoTecnico.setStyle("-fx-text-fill: #999; -fx-font-style: italic;");
+        }
     }
 
     @FXML
@@ -140,6 +149,16 @@ public class ChamadoEditController {
         c.setDescricao(txtDescricao.getText() != null ? txtDescricao.getText().trim() : null);
         c.setPrioridade(cmbPrioridade.getValue());
         c.setStatus(cmbStatus.getValue());
+        
+        // Resposta do técnico (pode ser editada)
+        String respostaTecnico = txtRespostaDoTecnico.getText();
+        if (respostaTecnico != null && !respostaTecnico.trim().isEmpty() 
+            && !respostaTecnico.equals("Sem resposta do técnico ainda.")) {
+            c.setRespostaDoTecnico(respostaTecnico.trim());
+        } else {
+            c.setRespostaDoTecnico(null);
+        }
+        
         // manter usuário/setor não editáveis aqui
         c.setNomeDoUsuario(chamadoOriginal.getNomeDoUsuario());
         c.setEmailDoUsuario(chamadoOriginal.getEmailDoUsuario());

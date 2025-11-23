@@ -151,7 +151,9 @@ public class UserListController implements Initializable {
      */
     @FXML
     private void handleEditar() {
+        System.out.println("Botão Editar clicado!");
         Usuario selecionado = selectionManager.getUsuarioSelecionado();
+        System.out.println("Usuário selecionado: " + (selecionado != null ? selecionado.getNome() : "NULO"));
         actionHandler.handleEditar(selecionado);
     }
 

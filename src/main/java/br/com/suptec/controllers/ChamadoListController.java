@@ -61,6 +61,9 @@ public class ChamadoListController implements Initializable {
     private TableColumn<Chamado, String> colDataAbertura;
 
     @FXML
+    private TableColumn<Chamado, String> colRespostaDoTecnico;
+
+    @FXML
     private Label totalChamadosLabel;
 
     @FXML
@@ -120,7 +123,8 @@ public class ChamadoListController implements Initializable {
             colNomeUsuario,
             colEmailUsuario,
             colSetorUsuario,
-            colDataAbertura
+            colDataAbertura,
+            colRespostaDoTecnico
         );
         
         searchHandler.inicializarFiltros();
