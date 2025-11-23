@@ -210,6 +210,9 @@ jspm_packages/
 # dotenv environment variables file
 .env
 
+# Application configuration with sensitive data
+src/main/resources/application.properties
+
 # IDE - VSCode
 .vscode/
 !.vscode/settings.json
