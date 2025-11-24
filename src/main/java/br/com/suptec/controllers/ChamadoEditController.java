@@ -1,5 +1,7 @@
 package br.com.suptec.controllers;
 
+import java.util.List;
+
 import br.com.suptec.models.Chamado;
 import br.com.suptec.models.Usuario;
 import br.com.suptec.services.ChamadoService;
@@ -11,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.util.List;
 
 /**
  * Controller para a tela de edição de chamados
