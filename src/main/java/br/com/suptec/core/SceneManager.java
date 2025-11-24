@@ -1,11 +1,11 @@
 package br.com.suptec.core;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.geometry.Rectangle2D;
 
 /**
  * Utilitário responsável por carregar e gerenciar cenas (views) da aplicação.
