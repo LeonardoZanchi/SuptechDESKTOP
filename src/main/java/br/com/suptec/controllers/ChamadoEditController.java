@@ -153,12 +153,24 @@ public class ChamadoEditController {
         c.setTitulo(txtTitulo.getText().trim());
         c.setDescricao(txtDescricao.getText() != null ? txtDescricao.getText().trim() : null);
         c.setPrioridade(cmbPrioridade.getValue());
-        c.setStatus(chamadoOriginal.getStatus()); // Mant\u00e9m o status original
         
-        // T\u00e9cnico respons\u00e1vel
-        if (cmbTecnicoResponsavel.getValue() != null && !cmbTecnicoResponsavel.getValue().trim().isEmpty()) {
+        // Lógica de mudança automática de status
+        String statusOriginal = chamadoOriginal.getStatus();
+        String novoStatus = statusOriginal;
+        
+        // Técnico responsável
+        boolean tecnicoAtribuido = cmbTecnicoResponsavel.getValue() != null && !cmbTecnicoResponsavel.getValue().trim().isEmpty();
+        if (tecnicoAtribuido) {
             c.setTecnicoResponsavel(cmbTecnicoResponsavel.getValue());
+            
+            // Se o chamado estava ABERTO e um técnico foi atribuído, muda para PENDENTE
+            if (statusOriginal != null && statusOriginal.equalsIgnoreCase("Aberto")) {
+                novoStatus = "Pendente";
+                System.out.println("DEBUG - Mudança automática de status: ABERTO -> PENDENTE (técnico atribuído)");
+            }
         }
+        
+        c.setStatus(novoStatus);
         
         // Resposta do t\u00e9cnico (pode ser editada)
         String respostaTecnico = txtRespostaDoTecnico.getText();

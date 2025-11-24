@@ -248,13 +248,27 @@ public class ChamadoService {
             if (obj.has("status") && !obj.get("status").isJsonNull()) {
                 chamado.setStatus(obj.get("status").getAsString());
             }
-            // Campo resposta do técnico (campo da API: respostaTecnico)
+            // Campo resposta do técnico (testar múltiplas variações de nome)
+            boolean respostaEncontrada = false;
             if (obj.has("respostaTecnico") && !obj.get("respostaTecnico").isJsonNull()) {
                 String resposta = obj.get("respostaTecnico").getAsString();
-                System.out.println("DEBUG - Resposta do Técnico encontrada: " + resposta);
+                System.out.println("DEBUG - Resposta do Técnico encontrada (respostaTecnico): " + resposta);
                 chamado.setRespostaDoTecnico(resposta);
-            } else {
-                System.out.println("DEBUG - Resposta do Técnico não encontrada ou null no JSON");
+                respostaEncontrada = true;
+            } else if (obj.has("respostaDoTecnico") && !obj.get("respostaDoTecnico").isJsonNull()) {
+                String resposta = obj.get("respostaDoTecnico").getAsString();
+                System.out.println("DEBUG - Resposta do Técnico encontrada (respostaDoTecnico): " + resposta);
+                chamado.setRespostaDoTecnico(resposta);
+                respostaEncontrada = true;
+            } else if (obj.has("resposta") && !obj.get("resposta").isJsonNull()) {
+                String resposta = obj.get("resposta").getAsString();
+                System.out.println("DEBUG - Resposta do Técnico encontrada (resposta): " + resposta);
+                chamado.setRespostaDoTecnico(resposta);
+                respostaEncontrada = true;
+            }
+            
+            if (!respostaEncontrada) {
+                System.out.println("DEBUG - Resposta do Técnico não encontrada em nenhuma variação (respostaTecnico, respostaDoTecnico, resposta)");
             }
             // Campo técnico responsável (pode ser nomeDoTecnico, tecnicoResponsavel, etc)
             if (obj.has("nomeDoTecnico") && !obj.get("nomeDoTecnico").isJsonNull()) {
@@ -290,6 +304,10 @@ public class ChamadoService {
         json.addProperty("prioridade", chamado.getPrioridade());
         if (chamado.getStatus() != null) {
             json.addProperty("status", chamado.getStatus());
+        }
+        // Adicionar técnico responsável se houver
+        if (chamado.getTecnicoResponsavel() != null && !chamado.getTecnicoResponsavel().trim().isEmpty()) {
+            json.addProperty("tecnicoResponsavel", chamado.getTecnicoResponsavel());
         }
         // Adicionar resposta do técnico se houver (campo da API: respostaTecnico)
         if (chamado.getRespostaDoTecnico() != null) {
