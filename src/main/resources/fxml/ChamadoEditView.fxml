@@ -60,8 +60,15 @@
                     </VBox>
 
                     <VBox spacing="8">
-                        <Label text="Status *" styleClass="form-label"/>
-                        <ComboBox fx:id="cmbStatus" promptText="Selecione status" styleClass="form-input" maxWidth="Infinity"/>
+                        <Label text="Status" styleClass="form-label"/>
+                        <Label fx:id="lblStatus" text="N/A" styleClass="form-input"/>
+                        <Label text="O status nao pode ser alterado manualmente" styleClass="hint-text"/>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Tecnico Responsavel" styleClass="form-label"/>
+                        <ComboBox fx:id="cmbTecnicoResponsavel" promptText="Selecione o tecnico" styleClass="form-input" maxWidth="Infinity"/>
+                        <Label text="Escolha o tecnico que ficara responsavel por este chamado" styleClass="hint-text"/>
                     </VBox>
 
                     <VBox spacing="8">
@@ -96,16 +103,16 @@
                 <Separator styleClass="form-separator"/>
 
                 <VBox spacing="12" styleClass="form-section">
-                    <Label text="DESCRIÇÃO" styleClass="section-title"/>
-                    <TextArea fx:id="txtDescricao" promptText="Descreva o problema ou solicitação" styleClass="form-input" prefRowCount="6" wrapText="true"/>
+                    <Label text="DESCRICAO" styleClass="section-title"/>
+                    <TextArea fx:id="txtDescricao" promptText="Descreva o problema ou solicitacao" styleClass="form-input" prefRowCount="6" wrapText="true"/>
                 </VBox>
 
                 <Separator styleClass="form-separator"/>
 
                 <VBox spacing="12" styleClass="form-section">
-                    <Label text="RESPOSTA DO TÉCNICO" styleClass="section-title"/>
-                    <TextArea fx:id="txtRespostaDoTecnico" promptText="Resposta do técnico" styleClass="form-input" prefRowCount="4" wrapText="true" editable="true"/>
-                    <Label text="Este campo pode ser editado para adicionar ou atualizar a resposta do técnico." styleClass="hint-text"/>
+                    <Label text="RESPOSTA DO TECNICO" styleClass="section-title"/>
+                    <TextArea fx:id="txtRespostaDoTecnico" promptText="Resposta do tecnico" styleClass="form-input" prefRowCount="4" wrapText="true" editable="true"/>
+                    <Label text="Este campo pode ser editado para adicionar ou atualizar a resposta do tecnico." styleClass="hint-text"/>
                 </VBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="8" styleClass="required-note">

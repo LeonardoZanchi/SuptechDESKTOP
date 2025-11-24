@@ -30,6 +30,7 @@ public class ChamadoTableConfigurator {
         TableColumn<Chamado, String> colEmailUsuario,
         TableColumn<Chamado, String> colSetorUsuario,
         TableColumn<Chamado, String> colDataAbertura,
+        TableColumn<Chamado, String> colTecnicoResponsavel,
         TableColumn<Chamado, String> colRespostaDoTecnico) {
         
         colId.setCellValueFactory(new PropertyValueFactory<>("chamadoID"));
@@ -40,11 +41,12 @@ public class ChamadoTableConfigurator {
         colEmailUsuario.setCellValueFactory(new PropertyValueFactory<>("emailFormatado"));
         colSetorUsuario.setCellValueFactory(new PropertyValueFactory<>("setorFormatado"));
         colDataAbertura.setCellValueFactory(new PropertyValueFactory<>("dataAberturaFormatada"));
+        colTecnicoResponsavel.setCellValueFactory(new PropertyValueFactory<>("tecnicoResponsavelFormatado"));
         colRespostaDoTecnico.setCellValueFactory(new PropertyValueFactory<>("respostaDoTecnicoFormatada"));
 
     aplicarEstilosPrioridade(colPrioridade);
     configurarLarguraColunas(colId, colTitulo, colPrioridade, colStatus, colNomeUsuario, 
-                colEmailUsuario, colSetorUsuario, colDataAbertura, colRespostaDoTecnico);
+                colEmailUsuario, colSetorUsuario, colDataAbertura, colTecnicoResponsavel, colRespostaDoTecnico);
     }
 
     private void aplicarEstilosPrioridade(TableColumn<Chamado, String> colPrioridade) {
@@ -87,17 +89,19 @@ public class ChamadoTableConfigurator {
             TableColumn<Chamado, String> colEmailUsuario,
             TableColumn<Chamado, String> colSetorUsuario,
             TableColumn<Chamado, String> colDataAbertura,
+            TableColumn<Chamado, String> colTecnicoResponsavel,
             TableColumn<Chamado, String> colRespostaDoTecnico) {
         
-        // Novas proporções para acomodar a coluna Status e Resposta do Técnico
-        colId.prefWidthProperty().bind(tableView.widthProperty().multiply(0.05));
-        colTitulo.prefWidthProperty().bind(tableView.widthProperty().multiply(0.18));
-        colPrioridade.prefWidthProperty().bind(tableView.widthProperty().multiply(0.08));
+        // Novas proporções para acomodar a coluna Status, Técnico Responsável e Resposta do Técnico
+        colId.prefWidthProperty().bind(tableView.widthProperty().multiply(0.04));
+        colTitulo.prefWidthProperty().bind(tableView.widthProperty().multiply(0.15));
+        colPrioridade.prefWidthProperty().bind(tableView.widthProperty().multiply(0.07));
         colStatus.prefWidthProperty().bind(tableView.widthProperty().multiply(0.07));
-        colNomeUsuario.prefWidthProperty().bind(tableView.widthProperty().multiply(0.13));
-        colEmailUsuario.prefWidthProperty().bind(tableView.widthProperty().multiply(0.15));
-        colSetorUsuario.prefWidthProperty().bind(tableView.widthProperty().multiply(0.09));
-        colDataAbertura.prefWidthProperty().bind(tableView.widthProperty().multiply(0.08));
-        colRespostaDoTecnico.prefWidthProperty().bind(tableView.widthProperty().multiply(0.17));
+        colNomeUsuario.prefWidthProperty().bind(tableView.widthProperty().multiply(0.11));
+        colEmailUsuario.prefWidthProperty().bind(tableView.widthProperty().multiply(0.13));
+        colSetorUsuario.prefWidthProperty().bind(tableView.widthProperty().multiply(0.08));
+        colDataAbertura.prefWidthProperty().bind(tableView.widthProperty().multiply(0.07));
+        colTecnicoResponsavel.prefWidthProperty().bind(tableView.widthProperty().multiply(0.13));
+        colRespostaDoTecnico.prefWidthProperty().bind(tableView.widthProperty().multiply(0.15));
     }
 }

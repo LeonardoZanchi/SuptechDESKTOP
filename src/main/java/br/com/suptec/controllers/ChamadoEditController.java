@@ -1,7 +1,9 @@
 package br.com.suptec.controllers;
 
 import br.com.suptec.models.Chamado;
+import br.com.suptec.models.Usuario;
 import br.com.suptec.services.ChamadoService;
+import br.com.suptec.services.UserManagementService;
 import br.com.suptec.utils.AlertUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -9,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 /**
  * Controller para a tela de edição de chamados
@@ -19,7 +23,8 @@ public class ChamadoEditController {
 
     @FXML private TextField txtTitulo;
     @FXML private ComboBox<String> cmbPrioridade;
-    @FXML private ComboBox<String> cmbStatus;
+    @FXML private Label lblStatus;
+    @FXML private ComboBox<String> cmbTecnicoResponsavel;
     @FXML private Label lblDataAbertura;
 
     @FXML private Label lblNomeUsuario;
@@ -39,11 +44,11 @@ public class ChamadoEditController {
 
     @FXML
     public void initialize() {
-        // Prioridades padrão
+        // Prioridades padr\u00e3o
         cmbPrioridade.getItems().addAll("Baixa", "Media", "Alta");
 
-        // Status comuns (ajuste conforme sua API)
-        cmbStatus.getItems().addAll("Aberto", "Pendente", "Fechado");
+        // Carregar lista de t\u00e9cnicos
+        carregarTecnicos();
     }
 
     public void setChamado(Chamado chamado) {
@@ -71,9 +76,13 @@ public class ChamadoEditController {
             cmbPrioridade.setValue(chamadoOriginal.getPrioridade());
         }
 
+        // Status nao editavel - apenas exibir
         if (chamadoOriginal.getStatus() != null) {
-            cmbStatus.setValue(chamadoOriginal.getStatus());
+            lblStatus.setText(chamadoOriginal.getStatus());
         }
+
+        // Tecnico responsavel - NAO autopreencher, deixar vazio para seleção manual
+        // Removido o autopreenchimento para permitir seleção limpa
 
         lblDataAbertura.setText(chamadoOriginal.getDataAberturaFormatada());
         lblNomeUsuario.setText(chamadoOriginal.getNomeDoUsuario());
@@ -93,10 +102,12 @@ public class ChamadoEditController {
     private void handleSalvar() {
         if (!validarCampos()) return;
 
+        String tecnicoNome = cmbTecnicoResponsavel.getValue() != null ? cmbTecnicoResponsavel.getValue() : "Nenhum";
+        
         boolean confirmado = AlertUtils.showConfirmation(
             "Confirmar Edição",
-            String.format("Deseja salvar as alterações do chamado?\n\nTitulo: %s\nPrioridade: %s\nStatus: %s",
-                txtTitulo.getText(), cmbPrioridade.getValue(), cmbStatus.getValue())
+            String.format("Deseja salvar as alterações do chamado?\n\nTitulo: %s\nPrioridade: %s\nTécnico: %s",
+                txtTitulo.getText(), cmbPrioridade.getValue(), tecnicoNome)
         );
 
         if (!confirmado) return;
@@ -128,14 +139,8 @@ public class ChamadoEditController {
         }
 
         if (cmbPrioridade.getValue() == null || cmbPrioridade.getValue().trim().isEmpty()) {
-            AlertUtils.showWarning("Campo Obrigatório", "Por favor, selecione a prioridade.");
+            AlertUtils.showWarning("Campo Obrigat\u00f3rio", "Por favor, selecione a prioridade.");
             cmbPrioridade.requestFocus();
-            return false;
-        }
-
-        if (cmbStatus.getValue() == null || cmbStatus.getValue().trim().isEmpty()) {
-            AlertUtils.showWarning("Campo Obrigatório", "Por favor, selecione o status.");
-            cmbStatus.requestFocus();
             return false;
         }
 
@@ -148,9 +153,14 @@ public class ChamadoEditController {
         c.setTitulo(txtTitulo.getText().trim());
         c.setDescricao(txtDescricao.getText() != null ? txtDescricao.getText().trim() : null);
         c.setPrioridade(cmbPrioridade.getValue());
-        c.setStatus(cmbStatus.getValue());
+        c.setStatus(chamadoOriginal.getStatus()); // Mant\u00e9m o status original
         
-        // Resposta do técnico (pode ser editada)
+        // T\u00e9cnico respons\u00e1vel
+        if (cmbTecnicoResponsavel.getValue() != null && !cmbTecnicoResponsavel.getValue().trim().isEmpty()) {
+            c.setTecnicoResponsavel(cmbTecnicoResponsavel.getValue());
+        }
+        
+        // Resposta do t\u00e9cnico (pode ser editada)
         String respostaTecnico = txtRespostaDoTecnico.getText();
         if (respostaTecnico != null && !respostaTecnico.trim().isEmpty() 
             && !respostaTecnico.equals("Sem resposta do técnico ainda.")) {
@@ -170,5 +180,24 @@ public class ChamadoEditController {
     private void fecharJanela() {
         Stage stage = (Stage) txtTitulo.getScene().getWindow();
         stage.close();
+    }
+
+    private void carregarTecnicos() {
+        try {
+            UserManagementService userService = UserManagementService.getInstance();
+            List<Usuario> tecnicos = userService.listarUsuarios().stream()
+                .filter(u -> u.getTipo() == Usuario.TipoUsuario.TECNICO)
+                .toList();
+            
+            cmbTecnicoResponsavel.getItems().clear();
+            cmbTecnicoResponsavel.getItems().add("Nenhum"); // Opção para remover técnico
+            
+            for (Usuario tecnico : tecnicos) {
+                cmbTecnicoResponsavel.getItems().add(tecnico.getEmail());
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar técnicos: " + e.getMessage());
+            AlertUtils.showWarning("Aviso", "Não foi possível carregar a lista de técnicos.");
+        }
     }
 }

@@ -214,6 +214,13 @@ public class ChamadoService {
 
     private Chamado parseChamado(JsonObject obj) {
         try {
+            // Debug: mostrar todos os campos recebidos
+            System.out.println("=== CAMPOS DO CHAMADO RECEBIDOS DA API ===");
+            for (String key : obj.keySet()) {
+                System.out.println("Campo: " + key + " = " + obj.get(key));
+            }
+            System.out.println("=========================================");
+            
             Chamado chamado = new Chamado();
             
             if (obj.has("chamadoID") && !obj.get("chamadoID").isJsonNull()) {
@@ -248,6 +255,17 @@ public class ChamadoService {
                 chamado.setRespostaDoTecnico(resposta);
             } else {
                 System.out.println("DEBUG - Resposta do Técnico não encontrada ou null no JSON");
+            }
+            // Campo técnico responsável (pode ser nomeDoTecnico, tecnicoResponsavel, etc)
+            if (obj.has("nomeDoTecnico") && !obj.get("nomeDoTecnico").isJsonNull()) {
+                String tecnico = obj.get("nomeDoTecnico").getAsString();
+                chamado.setTecnicoResponsavel(tecnico);
+            } else if (obj.has("tecnicoResponsavel") && !obj.get("tecnicoResponsavel").isJsonNull()) {
+                String tecnico = obj.get("tecnicoResponsavel").getAsString();
+                chamado.setTecnicoResponsavel(tecnico);
+            } else if (obj.has("tecnico") && !obj.get("tecnico").isJsonNull()) {
+                String tecnico = obj.get("tecnico").getAsString();
+                chamado.setTecnicoResponsavel(tecnico);
             }
             if (obj.has("dataAbertura") && !obj.get("dataAbertura").isJsonNull()) {
                 String dataStr = obj.get("dataAbertura").getAsString();

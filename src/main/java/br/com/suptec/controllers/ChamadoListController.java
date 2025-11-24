@@ -61,6 +61,9 @@ public class ChamadoListController implements Initializable {
     private TableColumn<Chamado, String> colDataAbertura;
 
     @FXML
+    private TableColumn<Chamado, String> colTecnicoResponsavel;
+
+    @FXML
     private TableColumn<Chamado, String> colRespostaDoTecnico;
 
     @FXML
@@ -124,6 +127,7 @@ public class ChamadoListController implements Initializable {
             colEmailUsuario,
             colSetorUsuario,
             colDataAbertura,
+            colTecnicoResponsavel,
             colRespostaDoTecnico
         );
         
