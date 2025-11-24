@@ -17,11 +17,11 @@ public class SceneManager {
 
     private static final String DEFAULT_STYLE = "/css/main.css";
     
-    // Percentual da tela que a janela deve ocupar (80% por padrão)
-    private static final double SCREEN_SIZE_PERCENTAGE = 0.80;
-    // Tamanho mínimo da janela
-    private static final double MIN_WIDTH = 800;
-    private static final double MIN_HEIGHT = 600;
+    // Percentual da tela que a janela deve ocupar (65% para janelas menores)
+    private static final double SCREEN_SIZE_PERCENTAGE = 0.65;
+    // Tamanho mínimo da janela (reduzido)
+    private static final double MIN_WIDTH = 680;
+    private static final double MIN_HEIGHT = 480;
 
     // Construtor privado para evitar instanciação
     private SceneManager() {} // impede instanciação
