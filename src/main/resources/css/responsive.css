@@ -1,0 +1,169 @@
+/* ===============================
+   RESPONSIVE STYLES - Estilos Responsivos
+   =======================================
+   Define configurações responsivas globais para garantir que a aplicação
+   se adapte a diferentes tamanhos de tela (notebooks, monitores grandes, etc.)
+   =============================== */
+
+/* ===============================
+   CONFIGURAÇÕES GLOBAIS RESPONSIVAS
+   =============================== */
+
+/* Containers principais devem crescer com o espaço disponível */
+.root {
+    -fx-font-smoothing-type: gray;
+}
+
+/* VBox e HBox principais devem ser flexíveis */
+VBox, HBox {
+    -fx-alignment: CENTER;
+}
+
+/* ScrollPane deve ser sempre responsivo */
+.scroll-pane {
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: false;
+}
+
+/* Tabelas devem ocupar todo espaço disponível */
+.table-view {
+    -fx-pref-width: Infinity;
+    -fx-min-width: 400;
+}
+
+/* ===============================
+   ADAPTAÇÕES PARA TELAS PEQUENAS
+   =============================== */
+
+/* Reduzir fontes em telas menores através de classes auxiliares */
+.compact-text {
+    -fx-font-size: 12px;
+}
+
+.compact-title {
+    -fx-font-size: 18px;
+}
+
+.compact-header {
+    -fx-font-size: 16px;
+}
+
+/* ===============================
+   ESPAÇAMENTOS RESPONSIVOS
+   =============================== */
+
+/* Reduzir espaçamentos em containers quando necessário */
+.compact-spacing VBox,
+.compact-spacing HBox {
+    -fx-spacing: 10;
+}
+
+/* Padding responsivo para containers principais */
+.responsive-container {
+    -fx-padding: 20;
+}
+
+/* ===============================
+   IMAGENS RESPONSIVAS
+   =============================== */
+
+/* Imagens devem manter proporção e se adaptar ao container */
+.responsive-image {
+    -fx-preserve-ratio: true;
+    -fx-smooth: true;
+}
+
+/* ===============================
+   GRID RESPONSIVO
+   =============================== */
+
+/* GridPane deve ajustar gaps automaticamente */
+.responsive-grid {
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+}
+
+/* Em telas menores, reduzir gaps */
+.responsive-grid.compact {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}
+
+/* ===============================
+   FORMULÁRIOS RESPONSIVOS
+   =============================== */
+
+/* Labels de formulário devem quebrar texto */
+.form-label {
+    -fx-wrap-text: true;
+    -fx-max-width: Infinity;
+}
+
+/* Campos de formulário devem ser flexíveis */
+.form-field {
+    -fx-max-width: Infinity;
+    -fx-pref-width: 300;
+    -fx-min-width: 150;
+}
+
+/* ===============================
+   BOTÕES RESPONSIVOS
+   =============================== */
+
+/* Botões devem ter largura mínima mas crescer se necessário */
+.responsive-button {
+    -fx-min-width: 120;
+    -fx-pref-width: 200;
+    -fx-max-width: 400;
+}
+
+/* ===============================
+   CONTAINERS DE CONTEÚDO
+   =============================== */
+
+/* Container principal de conteúdo */
+.content-container {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-alignment: TOP_CENTER;
+    -fx-fill-width: true;
+}
+
+/* Container com scroll para conteúdo grande */
+.scrollable-content {
+    -fx-fit-to-width: true;
+    -fx-hbar-policy: NEVER;
+    -fx-vbar-policy: AS_NEEDED;
+}
+
+/* ===============================
+   UTILITÁRIOS DE FLEXBOX
+   =============================== */
+
+/* Força elemento a crescer */
+.grow {
+    -fx-pref-width: Infinity;
+    -fx-pref-height: Infinity;
+}
+
+/* Força elemento a crescer horizontalmente */
+.grow-h {
+    -fx-pref-width: Infinity;
+}
+
+/* Força elemento a crescer verticalmente */
+.grow-v {
+    -fx-pref-height: Infinity;
+}
+
+/* ===============================
+   CLASSES DE ESPAÇAMENTO
+   =============================== */
+
+.spacing-small { -fx-spacing: 5; }
+.spacing-medium { -fx-spacing: 15; }
+.spacing-large { -fx-spacing: 25; }
+
+.padding-small { -fx-padding: 10; }
+.padding-medium { -fx-padding: 20; }
+.padding-large { -fx-padding: 40; }

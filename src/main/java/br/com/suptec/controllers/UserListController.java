@@ -132,7 +132,7 @@ public class UserListController implements Initializable {
     @FXML
     private void handleVoltar() {
         Stage stage = (Stage) btnVoltar.getScene().getWindow();
-        SceneManager.loadScene(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal", 1600, 1000, true, false);
+        SceneManager.replaceRootPreserveStage(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal");
     }
 
     // ==================== HANDLERS DE AÇÕES DE USUÁRIOS ====================
@@ -143,7 +143,7 @@ public class UserListController implements Initializable {
     @FXML
     private void handleNovo() {
         Stage stage = (Stage) btnNovo.getScene().getWindow();
-        SceneManager.loadScene(stage, "/fxml/UserFormView.fxml", "SUPTEC - Novo Usuário", 1600, 1000, true, false);
+        SceneManager.replaceRootPreserveStage(stage, "/fxml/UserFormView.fxml", "SUPTEC - Novo Usuário");
     }
 
     /**

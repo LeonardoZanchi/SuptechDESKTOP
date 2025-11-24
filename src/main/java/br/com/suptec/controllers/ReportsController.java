@@ -72,7 +72,7 @@ public class ReportsController implements Initializable {
     private void handleVoltar(javafx.event.ActionEvent event) {
         try {
             javafx.stage.Stage stage = (javafx.stage.Stage) lblTotalChamados.getScene().getWindow();
-            br.com.suptec.core.SceneManager.loadScene(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal", 1600, 1000, true, false);
+            br.com.suptec.core.SceneManager.replaceRootPreserveStage(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal");
         } catch (Exception e) {
             System.err.println("Erro ao voltar para o menu: " + e.getMessage());
         }

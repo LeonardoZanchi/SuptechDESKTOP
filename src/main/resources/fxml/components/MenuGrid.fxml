@@ -31,16 +31,17 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="br.com.suptec.controllers.components.MenuGridController"
       alignment="CENTER"
-      spacing="40">
-    <!-- Padding ajustado para permitir visualização do rodapé -->
+      spacing="40"
+      styleClass="content-container">
+    <!-- Padding responsivo -->
     <padding>
-        <Insets top="40" right="80" bottom="30" left="80"/>
+        <Insets top="30" right="40" bottom="20" left="40"/>
     </padding>
 
     <!-- ===========================================
          SEÇÃO DE BOAS-VINDAS
          =========================================== -->
-    <VBox alignment="CENTER" spacing="20">
+    <VBox alignment="CENTER" spacing="15">
         <Label text="Bem-vindo ao Sistema" styleClass="welcome-title"/>
         <Label text="Selecione uma opção abaixo" styleClass="welcome-subtitle"/>
     </VBox>
@@ -48,17 +49,26 @@
     <!-- ===========================================
          GRID DE CARDS - 2x2 com cards funcionais
          =========================================== -->
-    <GridPane hgap="50" vgap="50" alignment="CENTER">
+    <GridPane hgap="30" vgap="30" alignment="CENTER" styleClass="responsive-grid">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="250" prefWidth="350" maxWidth="450"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="250" prefWidth="350" maxWidth="450"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" minHeight="200" prefHeight="280" maxHeight="380"/>
+            <RowConstraints vgrow="SOMETIMES" minHeight="200" prefHeight="280" maxHeight="380"/>
+        </rowConstraints>
 
         <!-- ===========================================
              CARD 1: USUÁRIOS (Posição 0,0)
              ===========================================
              Gerenciamento de usuários do sistema
              =========================================== -->
-        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+        <VBox styleClass="menu-card" spacing="12" alignment="CENTER"
               onMouseClicked="#handleUsuarios"
-              GridPane.columnIndex="0" GridPane.rowIndex="0">
-            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+              GridPane.columnIndex="0" GridPane.rowIndex="0"
+              GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
             <Label text="👥" styleClass="card-icon"/>
             <Label text="Usuários" styleClass="card-title"/>
             <Label text="Gerenciar usuários" styleClass="card-description" wrapText="true"/>
@@ -69,10 +79,11 @@
              ===========================================
              Sistema de chamados técnicos
              =========================================== -->
-        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+        <VBox styleClass="menu-card" spacing="12" alignment="CENTER"
               onMouseClicked="#handleChamados"
-              GridPane.columnIndex="1" GridPane.rowIndex="0">
-            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+              GridPane.columnIndex="1" GridPane.rowIndex="0"
+              GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
             <Label text="📞" styleClass="card-icon"/>
             <Label text="Chamados" styleClass="card-title"/>
             <Label text="Gerenciar chamados" styleClass="card-description" wrapText="true"/>
@@ -83,10 +94,11 @@
              ===========================================
              Visualização de dados e estatísticas
              =========================================== -->
-        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+        <VBox styleClass="menu-card" spacing="12" alignment="CENTER"
               onMouseClicked="#handleRelatorios"
-              GridPane.columnIndex="0" GridPane.rowIndex="1">
-            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+              GridPane.columnIndex="0" GridPane.rowIndex="1"
+              GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
             <Label text="📊" styleClass="card-icon"/>
             <Label text="Relatórios" styleClass="card-title"/>
             <Label text="Visualizar dados" styleClass="card-description" wrapText="true"/>
@@ -97,11 +109,12 @@
              ===========================================
              Preferências e configurações do sistema
              =========================================== -->
-        <VBox styleClass="menu-card" spacing="15" alignment="CENTER"
+        <VBox styleClass="menu-card" spacing="12" alignment="CENTER"
               onMouseClicked="#handleConfiguracoes"
-              GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
-            <Label text="🔧" styleClass="card-icon"/>
+              GridPane.columnIndex="1" GridPane.rowIndex="1"
+              GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Label text="⚙️" styleClass="card-icon"/>
             <Label text="Configurações" styleClass="card-title"/>
             <Label text="Preferências" styleClass="card-description" wrapText="true"/>
         </VBox>

@@ -23,8 +23,8 @@ public class MenuGridController {
         try {
             // Obter o Stage atual através do evento
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Carregar a tela de lista de usuários com as mesmas dimensões do menu principal e sem permitir maximizar
-            SceneManager.loadScene(stage, "/fxml/UserListView.fxml", "SUPTEC - Gerenciamento de Usuários", 1600, 1000, true, false);
+            // Substituir o root para preservar o tamanho e estado de maximização do Stage
+            SceneManager.replaceRootPreserveStage(stage, "/fxml/UserListView.fxml", "SUPTEC - Gerenciamento de Usuários");
         } catch (Exception e) {
             System.err.println("✗ Erro ao abrir tela de usuários: " + e.getMessage());
             AlertUtils.showError("Erro", "Não foi possível abrir a tela de usuários.");
@@ -42,8 +42,8 @@ public class MenuGridController {
             // Obter o Stage atual através do evento
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             System.out.println("Stage obtido: " + stage);
-            // Carregar a tela de lista de chamados com as mesmas dimensões do menu principal
-            SceneManager.loadScene(stage, "/fxml/ChamadoListView.fxml", "SUPTEC - Gerenciamento de Chamados", 1600, 1000, false, false);
+            // Substituir o root para preservar o tamanho e estado de maximização do Stage
+            SceneManager.replaceRootPreserveStage(stage, "/fxml/ChamadoListView.fxml", "SUPTEC - Gerenciamento de Chamados");
             System.out.println("Tela carregada com sucesso!");
         } catch (Exception e) {
             System.err.println("Erro ao abrir tela de chamados: " + e.getMessage());
@@ -61,8 +61,8 @@ public class MenuGridController {
         try {
             // Obter o Stage atual através do evento
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Carregar a tela de relatórios
-            SceneManager.loadScene(stage, "/fxml/ReportsView.fxml", "SUPTEC - Relatórios", 1600, 1000, false, false);
+            // Substituir o root para preservar o tamanho e estado de maximização do Stage
+            SceneManager.replaceRootPreserveStage(stage, "/fxml/ReportsView.fxml", "SUPTEC - Relatórios");
         } catch (Exception e) {
             System.err.println("Erro ao abrir tela de relatórios: " + e.getMessage());
             e.printStackTrace();

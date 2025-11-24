@@ -20,17 +20,15 @@
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     /* Padding vertical para altura adequada */
-    -fx-padding: 18 0;
+    -fx-padding: 18 40;
     /* Cursor de mão para indicar clicabilidade */
     -fx-cursor: hand;
     /* Sombra para profundidade */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.4, 0, 4);
     /* Transição suave para efeitos hover */
     -fx-transition: 0.3s;
-    /* Largura fixa para consistência */
-    -fx-pref-width: 400;
-    /* Altura fixa para aparência uniforme */
-    -fx-pref-height: 60;
+    /* Largura mínima para evitar botões muito pequenos */
+    -fx-min-width: 200;
 }
 
 .btn-primary:hover {

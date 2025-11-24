@@ -48,3 +48,6 @@
 
 /* Formulários de usuários - estilos unificados para todas as telas de usuário */
 @import "user-forms.css";
+
+/* Responsividade - estilos para adaptação a diferentes tamanhos de tela */
+@import "responsive.css";

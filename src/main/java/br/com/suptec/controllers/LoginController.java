@@ -88,9 +88,9 @@ public class LoginController implements Initializable {
                 "Acesso de gerente confirmado.\n" +
                 "Você será redirecionado para o painel administrativo.");
 
-            // Navegar para o menu principal com dimensões ampliadas e sem permitir maximizar
+            // Navegar para o menu principal preservando estado da janela
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
-            SceneManager.loadScene(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal", 1600, 1000, true, false);
+            SceneManager.replaceRootPreserveStage(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal");
         } else {
             AlertUtils.showError("Acesso Negado", 
                 "Acesso restrito apenas para gerentes.\n\n" +

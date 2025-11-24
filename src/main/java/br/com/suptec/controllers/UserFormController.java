@@ -299,6 +299,6 @@ public class UserFormController implements Initializable {
      */
     private void voltarParaListagem() {
         Stage stage = (Stage) txtNome.getScene().getWindow();
-        SceneManager.loadScene(stage, "/fxml/UserListView.fxml", "SUPTEC - Gerenciar Usuários", 1600, 1000, true, false);
+        SceneManager.replaceRootPreserveStage(stage, "/fxml/UserListView.fxml", "SUPTEC - Gerenciar Usuários");
     }
 }

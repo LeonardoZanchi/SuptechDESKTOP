@@ -146,7 +146,7 @@ public class ChamadoListController implements Initializable {
     @FXML
     private void handleVoltar() {
         Stage stage = (Stage) btnVoltar.getScene().getWindow();
-        SceneManager.loadScene(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal", 1600, 1000, false, false);
+        SceneManager.replaceRootPreserveStage(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal");
     }
 
     @FXML
