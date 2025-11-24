@@ -125,7 +125,7 @@ VBox, HBox {
 .content-container {
     -fx-padding: 20;
     -fx-spacing: 15;
-    -fx-alignment: TOP_CENTER;
+    -fx-alignment: CENTER;
     -fx-fill-width: true;
 }
 

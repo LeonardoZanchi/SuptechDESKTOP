@@ -18,8 +18,8 @@
    TÍTULO DE BOAS-VINDAS - título grande na área central
    =============================== */
 .welcome-title {
-    /* Fonte extra grande para impacto visual profissional */
-    -fx-font-size: 48px;
+   /* Fonte extra grande para impacto visual profissional */
+   -fx-font-size: 36px;
     -fx-font-weight: bold;
     /* Cor azul escuro para consistência com tema */
     -fx-text-fill: #0A2E50;
@@ -29,8 +29,8 @@
    SUBTÍTULO DE BOAS-VINDAS - texto abaixo do título principal
    =============================== */
 .welcome-subtitle {
-    /* Fonte maior para texto secundário */
-    -fx-font-size: 20px;
+   /* Fonte maior para texto secundário */
+   -fx-font-size: 16px;
     /* Cor cinza para texto descritivo */
     -fx-text-fill: #607D88;
 }

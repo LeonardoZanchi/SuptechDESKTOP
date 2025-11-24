@@ -19,14 +19,14 @@
     /* Cursor de mão para indicar clicabilidade */
     -fx-cursor: hand;
     /* Dimensões mínimas para garantir usabilidade */
-    -fx-min-width: 200;
-    -fx-min-height: 180;
+    -fx-min-width: 140;
+    -fx-min-height: 120;
     /* Tamanho preferido que se adapta ao espaço disponível */
-    -fx-pref-width: 280;
-    -fx-pref-height: 240;
+    -fx-pref-width: 200;
+    -fx-pref-height: 180;
     /* Permite crescimento para telas maiores */
-    -fx-max-width: 450;
-    -fx-max-height: 380;
+    -fx-max-width: 320;
+    -fx-max-height: 260;
 }
 
 .menu-card:hover {
@@ -44,7 +44,7 @@
    =============================== */
 .card-icon {
     /* Ícone grande com tamanho responsivo */
-    -fx-font-size: 72px;
+    -fx-font-size: 36px;
     /* Cor azul escuro para consistência com tema */
     -fx-text-fill: #0A2E50;
 }
@@ -54,7 +54,7 @@
    =============================== */
 .card-title {
     /* Fonte grande e em negrito para destaque */
-    -fx-font-size: 24px;
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
     /* Cor azul escuro para consistência */
     -fx-text-fill: #0A2E50;
