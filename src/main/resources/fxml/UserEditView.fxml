@@ -80,7 +80,7 @@
                 <!-- Tipo de Usuário -->
                 <VBox spacing="8">
                     <Label text="Tipo de Usuário *" styleClass="form-label"/>
-                    <ComboBox fx:id="cmbTipo" promptText="Selecione o tipo de usuário" styleClass="form-input" maxWidth="Infinity"/>
+                    <Label fx:id="lblTipo" text="" styleClass="form-input" style="-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-border-radius: 4; -fx-background-radius: 4;"/>
                 </VBox>
 
                 <!-- Setor (condicional - para Gerentes e Usuários) -->
@@ -143,10 +143,10 @@
     <!-- Botões de Ação -->
     <bottom>
         <HBox spacing="20" alignment="CENTER" styleClass="button-container">
-            <Button text="Salvar Alterações" 
+            <Button text="Salvar" 
                     onAction="#handleSalvar" 
-                    styleClass="btn-primary"
-                    prefWidth="200"/>
+                    styleClass="btn-secondary"
+                    prefWidth="150"/>
             
             <Button text="Cancelar" 
                     onAction="#handleCancelar" 

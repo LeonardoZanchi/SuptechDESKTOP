@@ -129,7 +129,7 @@
 
     <bottom>
         <HBox spacing="20" alignment="CENTER" styleClass="button-container">
-            <Button text="Salvar Alterações" onAction="#handleSalvar" styleClass="btn-primary" prefWidth="200"/>
+            <Button text="Salvar" onAction="#handleSalvar" styleClass="btn-secondary" prefWidth="150"/>
             <Button text="Cancelar" onAction="#handleCancelar" styleClass="btn-secondary" prefWidth="150"/>
         </HBox>
     </bottom>

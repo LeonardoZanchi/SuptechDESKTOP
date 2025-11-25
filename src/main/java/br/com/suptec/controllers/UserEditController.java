@@ -7,7 +7,6 @@ import br.com.suptec.utils.AlertUtils;
 import br.com.suptec.utils.FieldValidator;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -23,7 +22,7 @@ public class UserEditController {
     @FXML private TextField txtNome;
     @FXML private TextField txtEmail;
     @FXML private TextField txtTelefone;
-    @FXML private ComboBox<TipoUsuario> cmbTipo;
+    @FXML private Label lblTipo;
     @FXML private VBox vboxSetor;
     @FXML private TextField txtSetor;
     @FXML private VBox vboxEspecialidade;
@@ -44,16 +43,8 @@ public class UserEditController {
 
     @FXML
     public void initialize() {
-        // Configurar ComboBox de tipos
-        cmbTipo.getItems().addAll(TipoUsuario.values());
-        
         // Configurar validações de campo em tempo real
         configurarValidacoesCampos();
-        
-        // Listener para mostrar/ocultar campos baseado no tipo
-        cmbTipo.valueProperty().addListener((obs, oldVal, newVal) -> {
-            atualizarCamposVisiveis(newVal);
-        });
 
         // Listener para mostrar/ocultar campos de senha
         chkAlterarSenha.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -119,7 +110,10 @@ public class UserEditController {
         txtNome.setText(usuarioOriginal.getNome());
         txtEmail.setText(usuarioOriginal.getEmail());
         txtTelefone.setText(usuarioOriginal.getTelefone());
-        cmbTipo.setValue(usuarioOriginal.getTipo());
+        lblTipo.setText(usuarioOriginal.getTipo().getDescricao());
+        
+        // Atualizar campos visíveis baseado no tipo original
+        atualizarCamposVisiveis(usuarioOriginal.getTipo());
         
         if (usuarioOriginal.getSetor() != null && !usuarioOriginal.getSetor().equals("N/A")) {
             txtSetor.setText(usuarioOriginal.getSetor());
@@ -175,7 +169,7 @@ public class UserEditController {
                 "Tipo: %s",
                 txtNome.getText(),
                 txtEmail.getText(),
-                cmbTipo.getValue().getDescricao()
+                usuarioOriginal.getTipo().getDescricao()
             )
         );
 
@@ -256,15 +250,8 @@ public class UserEditController {
             return false;
         }
 
-        // Tipo
-        if (cmbTipo.getValue() == null) {
-            AlertUtils.showWarning("Campo Obrigatório", "Por favor, selecione o tipo de usuário.");
-            cmbTipo.requestFocus();
-            return false;
-        }
-
         // Setor (para Gerentes e Usuários)
-        if ((cmbTipo.getValue() == TipoUsuario.GERENTE || cmbTipo.getValue() == TipoUsuario.USUARIO) &&
+        if ((usuarioOriginal.getTipo() == TipoUsuario.GERENTE || usuarioOriginal.getTipo() == TipoUsuario.USUARIO) &&
             (txtSetor.getText() == null || txtSetor.getText().trim().isEmpty())) {
             AlertUtils.showWarning("Campo Obrigatório", "Por favor, preencha o setor do usuário.");
             txtSetor.requestFocus();
@@ -272,7 +259,7 @@ public class UserEditController {
         }
 
         // Especialidade (para Técnicos)
-        if (cmbTipo.getValue() == TipoUsuario.TECNICO &&
+        if (usuarioOriginal.getTipo() == TipoUsuario.TECNICO &&
             (txtEspecialidade.getText() == null || txtEspecialidade.getText().trim().isEmpty())) {
             AlertUtils.showWarning("Campo Obrigatório", "Por favor, preencha a especialidade do técnico.");
             txtEspecialidade.requestFocus();
@@ -312,19 +299,33 @@ public class UserEditController {
         usuario.setNome(txtNome.getText().trim());
         usuario.setEmail(txtEmail.getText().trim());
         usuario.setTelefone(txtTelefone.getText().trim());
-        usuario.setTipo(cmbTipo.getValue());
+        usuario.setTipo(usuarioOriginal.getTipo()); // Manter tipo original (não editável)
+
+        // Debug logs
+        System.out.println("=== CONSTRUINDO USUÁRIO ATUALIZADO ===");
+        System.out.println("ID: " + usuario.getId());
+        System.out.println("Nome: " + usuario.getNome());
+        System.out.println("Email: " + usuario.getEmail());
+        System.out.println("Telefone: " + usuario.getTelefone());
+        System.out.println("Tipo: " + usuario.getTipo());
 
         // Senha (somente se alterando)
         if (chkAlterarSenha.isSelected()) {
             usuario.setSenha(txtNovaSenha.getText());
+            System.out.println("Senha: SERÁ ALTERADA");
+        } else {
+            System.out.println("Senha: NÃO SERÁ ALTERADA");
         }
 
         // Setor ou Especialidade baseado no tipo
-        if (cmbTipo.getValue() == TipoUsuario.GERENTE || cmbTipo.getValue() == TipoUsuario.USUARIO) {
+        if (usuarioOriginal.getTipo() == TipoUsuario.GERENTE || usuarioOriginal.getTipo() == TipoUsuario.USUARIO) {
             usuario.setSetor(txtSetor.getText().trim());
-        } else if (cmbTipo.getValue() == TipoUsuario.TECNICO) {
+            System.out.println("Setor: " + usuario.getSetor());
+        } else if (usuarioOriginal.getTipo() == TipoUsuario.TECNICO) {
             usuario.setEspecialidade(txtEspecialidade.getText().trim());
+            System.out.println("Especialidade: " + usuario.getEspecialidade());
         }
+        System.out.println("======================================");
 
         return usuario;
     }

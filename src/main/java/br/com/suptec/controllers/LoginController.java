@@ -85,16 +85,14 @@ public class LoginController implements Initializable {
             // Exibir mensagem de boas-vindas para gerente
             AlertUtils.showInfo("Acesso Autorizado!", 
                 "Bem-vindo ao SUPTEC Desktop, " + nomeUsuario + "!\n\n" +
-                "Acesso de gerente confirmado.\n" +
-                "Você será redirecionado para o painel administrativo.");
+                "Acesso de gerente confirmado.");
 
             // Navegar para o menu principal preservando estado da janela
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
             SceneManager.replaceRootPreserveStage(stage, "/fxml/MainMenuView.fxml", "SUPTEC - Menu Principal");
         } else {
             AlertUtils.showError("Acesso Negado", 
-                "Acesso restrito apenas para gerentes.\n\n" +
-                "Usuários técnicos e comuns devem usar o aplicativo mobile ou web.");
+                "Credenciais Invalidas.");
         }
     }
 }

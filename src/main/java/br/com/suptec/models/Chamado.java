@@ -23,7 +23,7 @@ public class Chamado {
     // Enum para prioridades
     public enum Prioridade {
         BAIXA("Baixa"),
-        MEDIA("Media"),
+        MEDIA("Média"),
         ALTA("Alta");
 
         private final String descricao;

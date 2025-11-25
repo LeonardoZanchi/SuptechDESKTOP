@@ -69,10 +69,9 @@
                              prefWidth="130"/>
                     
                     <Button fx:id="btnAtualizar"
-                            text="Atualizar"
+                            text="🔄 Atualizar"
                             onAction="#handleAtualizar"
-                            styleClass="btn-secondary"
-                            prefWidth="100"/>
+                            styleClass="btn-secondary"/>
                 </HBox>
             </VBox>
 

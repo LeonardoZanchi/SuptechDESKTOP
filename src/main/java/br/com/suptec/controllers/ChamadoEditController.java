@@ -44,8 +44,8 @@ public class ChamadoEditController {
 
     @FXML
     public void initialize() {
-        // Prioridades padr\u00e3o
-        cmbPrioridade.getItems().addAll("Baixa", "Media", "Alta");
+        // Prioridades padrão
+        cmbPrioridade.getItems().addAll("Baixa", "Média", "Alta");
 
         // Carregar lista de t\u00e9cnicos
         carregarTecnicos();
@@ -73,7 +73,20 @@ public class ChamadoEditController {
         txtDescricao.setText(chamadoOriginal.getDescricao());
 
         if (chamadoOriginal.getPrioridade() != null) {
-            cmbPrioridade.setValue(chamadoOriginal.getPrioridade());
+            // Normalizar prioridade para corresponder às opções do ComboBox
+            String prioridade = chamadoOriginal.getPrioridade().trim();
+            
+            // Tratar variações possíveis (Média/Media, maiúsculas/minúsculas)
+            if (prioridade.equalsIgnoreCase("Media") || prioridade.equalsIgnoreCase("Média")) {
+                cmbPrioridade.setValue("Média");
+            } else if (prioridade.equalsIgnoreCase("Baixa")) {
+                cmbPrioridade.setValue("Baixa");
+            } else if (prioridade.equalsIgnoreCase("Alta")) {
+                cmbPrioridade.setValue("Alta");
+            } else {
+                System.out.println("AVISO: Prioridade não reconhecida: '" + prioridade + "'");
+                cmbPrioridade.setValue("Média"); // Valor padrão
+            }
         }
 
         // Status nao editavel - apenas exibir

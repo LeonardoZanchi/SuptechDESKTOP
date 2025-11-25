@@ -130,9 +130,9 @@
         <HBox spacing="15" alignment="CENTER" styleClass="button-container">
 
             <Button fx:id="btnNovo"
-                    text="Novo Usuário"
+                    text="Adicionar"
                     onAction="#handleNovo"
-                    styleClass="btn-primary"
+                    styleClass="btn-secondary"
                     prefWidth="150"/>
 
             <Button fx:id="btnInformacoes"
